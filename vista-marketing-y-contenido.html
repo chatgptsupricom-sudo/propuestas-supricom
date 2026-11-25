@@ -1,0 +1,1316 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vista Marketing y Contenido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --soft: #f1f5f9;
+  --line: #e2e8f0;
+  --fg: #0f172a;
+  --fg-2: #475569;
+  --fg-3: #94a3b8;
+  --navy: #0f172a;
+  --blue: #2563eb;
+  --blue-2: #60a5fa;
+  --blue-3: #93c5fd;
+  --blue-tint: #eff6ff;
+  --red: #dc2626;
+  --red-tint: #fef2f2;
+  --amber: #b45309;
+  --amber-tint: #fffbeb;
+  --green: #047857;
+  --green-tint: #ecfdf5;
+  --sh: 0 1px 2px rgba(15,23,42,.04), 0 6px 20px rgba(15,23,42,.05);
+  --inter: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg); font-family: var(--inter);
+  font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 12px 40px; min-height: 100vh;
+}
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .5; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+[hidden] { display: none !important; }
+
+.layout { display: grid; grid-template-columns: 1fr; min-width: 0; }
+@media (min-width: 980px) {
+  body { padding-left: 0; padding-right: 0; padding-block: 0; }
+  .layout { grid-template-columns: 236px minmax(0, 1fr); min-height: 100vh; }
+}
+
+
+.side { display: none; background: var(--navy); color: #94a3b8; padding: 18px 12px 14px; flex-direction: column; gap: 2px; }
+@media (min-width: 980px) { .side { display: flex; position: sticky; top: 0; height: 100vh; overflow-y: auto; } }
+.logo { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 700; padding: 2px 8px 16px; font-size: 15px; }
+.logo i { width: 32px; height: 32px; border-radius: 9px; background: #fff; display: grid; place-items: center; font-style: normal; }
+.logo i::before { content: ""; width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--blue); border-right-color: transparent; }
+.nav { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 9px; font-size: 13px; color: #94a3b8; text-decoration: none; position: relative; }
+.nav:hover { background: rgba(255,255,255,.04); color: #e2e8f0; }
+.nav.on { background: rgba(255,255,255,.07); color: #60a5fa; font-weight: 600; }
+.nav.on::before { content: ""; position: absolute; left: -12px; top: 8px; bottom: 8px; width: 3px; border-radius: 0 3px 3px 0; background: var(--blue-2); }
+.nav svg { width: 16px; height: 16px; flex: none; }
+.nav .new { margin-left: auto; font-size: 9.5px; font-weight: 700; padding: 1px 6px; border-radius: 999px; background: var(--blue); color: #fff; }
+.side .sep { height: 1px; background: rgba(255,255,255,.06); margin: 8px 6px; }
+.user { margin-top: auto; display: flex; align-items: center; gap: 10px; padding: 10px 8px 4px; border-top: 1px solid rgba(255,255,255,.06); }
+.user .av { width: 32px; height: 32px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font-size: 11px; font-weight: 700; flex: none; }
+.user b { display: block; color: #fff; font-size: 13px; line-height: 1.2; }
+.user small { color: var(--blue-2); font-size: 10.5px; font-weight: 600; }
+
+
+.main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; min-width: 0; align-content: start; }
+@media (min-width: 980px) { .main.outer { padding: 0 32px 48px; } }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.top .brand { font-weight: 800; letter-spacing: -.02em; color: var(--blue); font-size: 15px; }
+.top .role { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--fg-2); }
+.top .role b { color: var(--fg); font-weight: 600; }
+.chip-was { font-size: 10.5px; padding: 1px 7px; border-radius: 999px; background: var(--blue-tint); color: var(--blue); font-weight: 600; }
+.mnav { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; max-width: 100%; }
+@media (min-width: 980px) { .mnav { display: none; } }
+.mnav a { white-space: nowrap; font-size: 12.5px; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--fg-2); text-decoration: none; }
+.mnav a.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+
+.head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; }
+.head h1 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -.02em; text-wrap: balance; display: flex; align-items: center; gap: 10px; }
+.head h1 .hi { width: 34px; height: 34px; border-radius: 10px; background: var(--blue-tint); color: var(--blue); display: grid; place-items: center; flex: none; }
+.head h1 .hi svg { width: 18px; height: 18px; }
+.head p { margin: 4px 0 0; color: var(--fg-2); max-width: 72ch; font-size: 13px; }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.sel, .inp { height: 36px; border: 1px solid var(--line); background: var(--card); border-radius: 10px; padding: 0 10px; font-size: 13px; max-width: 100%; }
+.inp { min-width: 0; flex: 1 1 200px; }
+.btn { height: 36px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; color: var(--fg); white-space: nowrap; }
+.btn:hover { border-color: #cbd5e1; }
+.btn.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+.btn.blue { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn.sm { height: 30px; padding: 0 10px; font-size: 12px; border-radius: 8px; }
+.btn svg { width: 14px; height: 14px; }
+.tog { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); font-size: 13px; font-weight: 500; }
+.tog[aria-pressed="true"] { background: var(--blue-tint); border-color: #bfdbfe; color: var(--blue); }
+.tog i { width: 26px; height: 15px; border-radius: 999px; background: #cbd5e1; position: relative; transition: background .15s; }
+.tog i::after { content: ""; position: absolute; top: 2px; left: 2px; width: 11px; height: 11px; border-radius: 50%; background: #fff; transition: transform .15s; }
+.tog[aria-pressed="true"] i { background: var(--blue); }
+.tog[aria-pressed="true"] i::after { transform: translateX(11px); }
+
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; min-width: 0; display: grid; gap: 12px; align-content: start; box-shadow: var(--sh); }
+.panel-h { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.panel-h h2 { margin: 0; font-size: 15px; font-weight: 600; }
+.panel-h small { color: var(--fg-3); font-size: 12px; }
+.src { font-size: 11.5px; color: var(--fg-3); }
+.src b { font-weight: 600; color: var(--fg-2); }
+.grid2 { display: grid; gap: 16px; min-width: 0; }
+@media (min-width: 1100px) { .grid2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+.pill { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.pill.blue { background: var(--blue-tint); color: var(--blue); }
+.pill.red { background: var(--red-tint); color: var(--red); }
+.pill.amber { background: var(--amber-tint); color: var(--amber); }
+.pill.green { background: var(--green-tint); color: var(--green); }
+.pill.gray { background: var(--soft); color: var(--fg-2); }
+.newtag { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 999px; background: var(--blue); color: #fff; }
+.chg { display: flex; gap: 10px; align-items: flex-start; background: var(--blue-tint); border: 1px solid #bfdbfe; color: #1e3a8a; border-radius: 12px; padding: 10px 14px; font-size: 12.5px; }
+.chg svg { flex: none; width: 16px; height: 16px; margin-top: 2px; }
+.chg.warn { background: var(--amber-tint); border-color: #fde68a; color: #78350f; }
+
+
+.kpis { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 760px) { .kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.kpi { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 2px; min-width: 0; box-shadow: var(--sh); }
+.kpi span { font-size: 12px; color: var(--fg-2); }
+.kpi b { font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+.kpi em { font-style: normal; font-size: 12px; font-weight: 600; color: var(--fg-2); }
+.kpi.lead { background: var(--navy); border-color: var(--navy); color: #fff; }
+.kpi.lead span, .kpi.lead em { color: #cbd5e1; }
+.kpi .spark { height: 26px; margin-top: 4px; }
+.kpi .spark svg { width: 100%; height: 100%; display: block; }
+.kpi.c-green b { color: var(--green); } .kpi.c-red b { color: var(--red); } .kpi.c-amber b { color: var(--amber); }
+.up { color: var(--green) !important; }
+.down { color: var(--red) !important; }
+.kpi.lead .up { color: #6ee7b7 !important; }
+
+
+.tbl-wrap { overflow-x: auto; margin: 0 -20px; padding: 0 20px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 760px; }
+th { text-align: left; font-size: 11.5px; font-weight: 600; color: var(--fg-3); padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+tr:last-child td { border-bottom: 0; }
+td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.thumb { width: 40px; height: 40px; border-radius: 8px; background: linear-gradient(135deg, #dbeafe, #eff6ff); display: grid; place-items: center; color: var(--blue); font-size: 9px; font-weight: 700; flex: none; }
+.post { display: flex; align-items: center; gap: 10px; min-width: 200px; }
+.post b { display: block; font-weight: 600; font-size: 13px; }
+.post small { color: var(--fg-3); font-size: 12px; }
+.rate { display: inline-flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.rate i { display: block; height: 6px; border-radius: 999px; background: var(--blue); }
+
+
+.chart svg { width: 100%; height: auto; display: block; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--fg-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.hbars { display: grid; gap: 10px; }
+.hb { display: grid; grid-template-columns: 110px minmax(0, 1fr) 70px; gap: 10px; align-items: center; font-size: 13px; }
+.hb span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hb .track { height: 10px; background: var(--soft); border-radius: 999px; overflow: hidden; }
+.hb .track i { display: block; height: 100%; background: var(--blue); border-radius: 999px; }
+.hb .track i.me { background: var(--navy); }
+.hb b { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+
+
+.pop-top { display: grid; gap: 16px; min-width: 0; }
+@media (min-width: 1100px) { .pop-top { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); } }
+.hero { position: relative; overflow: hidden; border-radius: 20px; padding: 20px 22px; color: #fff; background: linear-gradient(135deg, #1e40af 0%, #2563eb 55%, #3b82f6 100%); display: grid; gap: 12px; min-width: 0; box-shadow: 0 16px 36px rgba(37,99,235,.22); }
+.hero::after { content: ""; position: absolute; width: 320px; height: 320px; right: -110px; top: -140px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.18), rgba(255,255,255,0) 70%); pointer-events: none; }
+.hero > * { position: relative; }
+.hero .pg { justify-self: start; font-size: 11.5px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); }
+.hero .big { font-size: 44px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+.hero .big small { font-size: 15px; font-weight: 500; opacity: .85; letter-spacing: 0; }
+.hero .bar { height: 7px; border-radius: 999px; background: rgba(255,255,255,.25); overflow: hidden; }
+.hero .bar i { display: block; height: 100%; background: #fff; }
+.hero .lg { display: flex; gap: 16px; font-size: 12.5px; opacity: .95; flex-wrap: wrap; }
+.need ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.need li { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); }
+.need li:first-child { border-top: 0; }
+.need li .txt { flex: 1; min-width: 0; }
+.need li b { display: block; font-size: 12.5px; }
+.need li small { color: var(--fg-2); font-size: 11.5px; }
+.need .ic { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; flex: none; }
+.need .ic svg { width: 14px; height: 14px; }
+.ic.red { background: var(--red-tint); color: var(--red); }
+.ic.amber { background: var(--amber-tint); color: var(--amber); }
+.ic.blue { background: var(--blue-tint); color: var(--blue); }
+.ic.green { background: var(--green-tint); color: var(--green); }
+.weeks { font-size: 12px; font-weight: 700; text-align: right; line-height: 1.2; }
+.weeks small { display: block; font-weight: 500; color: var(--fg-3); font-size: 10.5px; }
+
+.ptabs { display: flex; gap: 4px; background: var(--card); border-radius: 999px; padding: 5px; box-shadow: var(--sh); border: 1px solid var(--line); overflow-x: auto; max-width: 100%; justify-self: start; }
+.ptabs button { border: 0; background: none; padding: 7px 13px; border-radius: 999px; font-size: 12.5px; font-weight: 500; color: var(--fg-2); white-space: nowrap; display: inline-flex; gap: 6px; align-items: center; }
+.ptabs button.on { background: var(--navy); color: #fff; }
+.ptabs button .cnt { font-size: 10.5px; font-weight: 700; padding: 0 6px; border-radius: 999px; background: var(--soft); color: var(--fg-2); }
+.ptabs button.on .cnt { background: rgba(255,255,255,.18); color: #fff; }
+.ptabs button .cnt.red { background: var(--red-tint); color: var(--red); }
+
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 6px 12px; font-size: 12.5px; font-weight: 500; display: inline-flex; gap: 6px; align-items: center; }
+.chip.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+.chip i { font-style: normal; font-size: 11px; font-weight: 700; padding: 0 6px; border-radius: 999px; background: var(--soft); color: var(--fg-2); }
+.chip.on i { background: rgba(255,255,255,.18); color: #fff; }
+.sug { display: grid; gap: 12px; }
+@media (min-width: 1300px) { .sug { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: grid; gap: 12px; min-width: 0; align-content: start; box-shadow: var(--sh); }
+.card-top { display: flex; gap: 12px; align-items: flex-start; justify-content: space-between; }
+.card-top h3 { margin: 0; font-size: 15px; font-weight: 600; }
+.card-top small { color: var(--fg-2); font-size: 12px; }
+.ring { width: 54px; height: 54px; flex: none; position: relative; display: grid; place-items: center; }
+.ring svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+.ring b { font-size: 16px; font-weight: 700; color: var(--blue); }
+.facts { display: grid; gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.facts div { background: var(--soft); border-radius: 10px; padding: 8px 10px; min-width: 0; }
+.facts small { display: block; font-size: 11.5px; color: var(--fg-3); }
+.facts b { font-size: 13.5px; font-weight: 600; }
+.why { font-size: 13px; color: var(--fg-2); margin: 0; }
+.why b { color: var(--fg); }
+.popsug { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--fg-2); flex-wrap: wrap; }
+.popsug .thumb { width: 30px; height: 30px; font-size: 8px; }
+.acts { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.efx { display: inline-flex; align-items: center; gap: 6px; }
+.efx .mini { display: inline-flex; align-items: flex-end; gap: 3px; height: 22px; }
+.efx .mini i { width: 10px; border-radius: 2px; display: block; }
+
+
+.prod-grid { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 760px) { .prod-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1200px) { .prod-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.prod { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: grid; box-shadow: var(--sh); min-width: 0; }
+.prod .img { aspect-ratio: 1 / 1; max-width: 100%; background: var(--soft); display: grid; place-items: center; color: #cbd5e1; position: relative; }
+.prod .img svg { width: 42%; height: 42%; }
+.prod .img .tag { position: absolute; top: 8px; left: 8px; }
+.prod .info { padding: 10px 12px 12px; display: grid; gap: 4px; }
+.prod .info small { color: var(--fg-3); font-size: 11px; }
+.prod .info b { font-size: 12px; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.7em; }
+.prod .row { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.prod .price { font-weight: 700; font-size: 13px; }
+
+
+.pk { display: grid; gap: 16px; min-width: 0; }
+@media (min-width: 1100px) { .pk { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); } }
+.cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px; }
+.cal .dn { font-size: 11px; color: var(--fg-3); text-align: center; padding-bottom: 2px; }
+.cal button { aspect-ratio: 1 / 1; max-width: 100%; border: 1px solid var(--line); background: var(--card); border-radius: 10px; font-size: 12px; display: grid; align-content: start; justify-items: start; padding: 5px 6px; gap: 2px; min-width: 0; }
+.cal button.empty { visibility: hidden; }
+.cal button.has { border-color: #bfdbfe; }
+.cal button.sel { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue-tint); }
+.cal button.today b { background: var(--navy); color: #fff; border-radius: 999px; padding: 0 5px; }
+.cal button i { font-style: normal; font-size: 9.5px; font-weight: 600; padding: 0 4px; border-radius: 4px; max-width: 100%; overflow: hidden; white-space: nowrap; }
+.cal .ok i { background: var(--green-tint); color: var(--green); }
+.cal .cnt i { background: var(--amber-tint); color: var(--amber); }
+.cal .va i { background: var(--blue-tint); color: var(--blue); }
+.plist { list-style: none; margin: 0; padding: 0; display: grid; }
+.plist li { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); flex-wrap: wrap; }
+.plist li:first-child { border-top: 0; }
+.plist .txt { flex: 1 1 180px; min-width: 0; }
+.plist .txt b { display: block; font-size: 13px; font-weight: 600; }
+.plist .txt small { color: var(--fg-2); font-size: 12px; }
+
+
+.comp-grid { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 900px) { .comp-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.acc { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 8px; min-width: 0; box-shadow: var(--sh); }
+.acc.me { border-color: var(--navy); box-shadow: 0 0 0 1px var(--navy); }
+.acc .h { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.acc .h .av { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; background: var(--soft); color: var(--fg-2); flex: none; }
+.acc.me .h .av { background: var(--navy); color: #fff; }
+.acc .h b { font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.acc dl { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 4px 8px; font-size: 12px; }
+.acc dt { color: var(--fg-2); }
+.acc dd { margin: 0; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+
+.same { display: grid; place-items: center; text-align: center; gap: 8px; padding: 48px 20px; }
+.same svg { width: 40px; height: 40px; color: var(--fg-3); }
+.same b { font-size: 16px; }
+.same p { margin: 0; color: var(--fg-2); max-width: 52ch; font-size: 13px; }
+
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--navy); color: #fff; padding: 10px 16px; border-radius: 10px; font-size: 13px; box-shadow: 0 10px 30px rgba(15,23,42,.25); max-width: calc(100% - 32px); z-index: 20; }
+.note-sim { font-size: 12px; color: var(--fg-3); margin: 0; }
+
+.khero { position: relative; overflow: hidden; border-radius: 22px; color: #fff; padding: 22px 24px 0; background: radial-gradient(120% 140% at 0% 0%, #1e40af 0%, #0f172a 62%); display: grid; gap: 14px; min-width: 0; box-shadow: 0 18px 40px rgba(15,23,42,.28); }
+.khero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(40% 60% at 85% 10%, rgba(56,189,248,.28), transparent 70%); pointer-events: none; }
+.khero > * { position: relative; }
+.khero-top { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: flex-end; }
+.khero small { color: #93c5fd; font-size: 12.5px; font-weight: 600; }
+.khero .big { font-size: 46px; font-weight: 800; letter-spacing: -.035em; line-height: 1.05; }
+.khero .delta { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: rgba(110,231,183,.16); color: #6ee7b7; margin-left: 8px; vertical-align: middle; }
+.kstats { display: flex; gap: 10px; flex-wrap: wrap; }
+.kstat { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 10px 14px; min-width: 120px; }
+.kstat span { display: block; font-size: 11.5px; color: #cbd5e1; }
+.kstat b { font-size: 18px; font-weight: 700; }
+.kstat em { font-style: normal; font-size: 11.5px; font-weight: 700; color: #6ee7b7; margin-left: 4px; }
+.khero .area svg { width: 100%; height: 110px; display: block; }
+.kpis.icons .kpi { grid-template-columns: auto 1fr; column-gap: 12px; align-items: center; }
+.kpis.icons .kpi .ki { grid-row: span 3; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; }
+.kpis.icons .kpi .ki svg { width: 19px; height: 19px; }
+.gallery { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 1280px) { .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.gpost { border-radius: 16px; overflow: hidden; background: var(--card); border: 1px solid var(--line); box-shadow: var(--sh); display: grid; min-width: 0; transition: transform .15s, box-shadow .15s; }
+.gpost:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(15,23,42,.12); }
+.gpost .cover { aspect-ratio: 4 / 5; max-width: 100%; position: relative; display: grid; place-items: center; color: rgba(255,255,255,.9); }
+.gpost .cover svg.fi { width: 44px; height: 44px; opacity: .9; }
+.gpost .cover .rank { position: absolute; top: 10px; left: 10px; width: 28px; height: 28px; border-radius: 50%; background: #fff; color: var(--navy); font-weight: 800; font-size: 13px; display: grid; place-items: center; }
+.gpost .cover .fmt { position: absolute; top: 12px; right: 10px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: rgba(15,23,42,.45); color: #fff; }
+.gpost .cover .ttl { position: absolute; left: 12px; right: 12px; bottom: 12px; font-weight: 700; font-size: 14px; line-height: 1.25; color: #fff; text-shadow: 0 1px 8px rgba(15,23,42,.5); }
+.gpost .meta { padding: 10px 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; font-size: 12px; }
+.gpost .meta span { display: grid; justify-items: center; color: var(--fg-2); }
+.gpost .meta b { font-size: 13px; color: var(--fg); font-variant-numeric: tabular-nums; }
+.gpost .rate-bar { height: 4px; background: var(--soft); }
+.gpost .rate-bar i { display: block; height: 100%; background: var(--blue); }
+.c-reel { background: linear-gradient(160deg, #1e3a8a 0%, #2563eb 55%, #38bdf8 100%); }
+.c-carrusel { background: linear-gradient(160deg, #0f172a 0%, #1d4ed8 70%, #60a5fa 100%); }
+.c-foto { background: linear-gradient(160deg, #334155 0%, #64748b 100%); }
+.c-historia { background: linear-gradient(160deg, #0369a1 0%, #0ea5e9 100%); }
+.donut-wrap { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+.donut-wrap svg { width: 150px; height: 150px; flex: none; }
+.dleg { display: grid; gap: 8px; flex: 1 1 160px; }
+.dleg div { display: grid; grid-template-columns: 12px 1fr auto; gap: 8px; align-items: center; font-size: 13px; }
+.dleg i { width: 12px; height: 12px; border-radius: 4px; }
+.dleg b { font-variant-numeric: tabular-nums; }
+
+.podium { border-radius: 22px; padding: 22px 24px; color: #fff; background: radial-gradient(120% 140% at 100% 0%, #1d4ed8 0%, #0f172a 60%); display: grid; gap: 16px; min-width: 0; box-shadow: 0 18px 40px rgba(15,23,42,.28); position: relative; overflow: hidden; }
+.podium::before { content: ""; position: absolute; width: 360px; height: 360px; left: -120px; bottom: -220px; border-radius: 50%; background: radial-gradient(circle, rgba(56,189,248,.22), transparent 70%); }
+.podium > * { position: relative; }
+.podium h2 { margin: 0; font-size: 20px; font-weight: 700; }
+.podium p { margin: 2px 0 0; color: #cbd5e1; font-size: 13px; }
+.ranks { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.rk { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 12px 14px; display: grid; gap: 4px; }
+.rk span { font-size: 11.5px; color: #cbd5e1; }
+.rk b { font-size: 26px; font-weight: 800; letter-spacing: -.02em; }
+.rk b small { font-size: 13px; font-weight: 600; color: #93c5fd; }
+.rk em { font-style: normal; font-size: 12px; color: #e2e8f0; }
+.acc .h .av { position: relative; }
+.acc .ringav { width: 36px; height: 36px; border-radius: 50%; padding: 2px; background: conic-gradient(#2563eb, #38bdf8, #2563eb); flex: none; }
+.acc .ringav span { width: 100%; height: 100%; border-radius: 50%; background: #fff; display: grid; place-items: center; font-size: 11px; font-weight: 800; color: var(--navy); }
+.acc.me .ringav { background: conic-gradient(#0f172a, #2563eb, #0f172a); }
+
+
+.ahero { display: grid; gap: 16px; min-width: 0; }
+@media (min-width: 1100px) { .ahero { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
+.agreet { border-radius: 22px; padding: 22px 24px; color: #fff; background: radial-gradient(120% 160% at 0% 0%, #2563eb 0%, #1e3a8a 45%, #0f172a 100%); display: flex; gap: 20px; align-items: center; justify-content: space-between; flex-wrap: wrap; min-width: 0; box-shadow: 0 18px 40px rgba(30,58,138,.28); }
+.agreet small { color: #bfdbfe; font-size: 12.5px; font-weight: 600; }
+.agreet h1 { margin: 2px 0 6px; font-size: 28px; font-weight: 800; letter-spacing: -.02em; }
+.agreet p { margin: 0; color: #dbeafe; font-size: 13px; max-width: 46ch; }
+.aring { position: relative; width: 108px; height: 108px; flex: none; }
+.aring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.aring div { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; line-height: 1.1; }
+.aring b { font-size: 24px; font-weight: 800; }
+.aring small { display: block; font-size: 10.5px; color: #bfdbfe; }
+.acount { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ac { border-radius: 16px; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); box-shadow: var(--sh); display: grid; gap: 2px; }
+.ac span { font-size: 12px; color: var(--fg-2); display: flex; align-items: center; gap: 6px; }
+.ac span i { width: 8px; height: 8px; border-radius: 50%; }
+.ac b { font-size: 26px; font-weight: 800; letter-spacing: -.02em; }
+.atabs { display: flex; gap: 4px; background: var(--card); border-radius: 14px; padding: 5px; box-shadow: var(--sh); border: 1px solid var(--line); overflow-x: auto; max-width: 100%; }
+.atabs button { border: 0; background: none; padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; color: var(--fg-2); white-space: nowrap; display: inline-flex; gap: 7px; align-items: center; }
+.atabs button svg { width: 15px; height: 15px; }
+.atabs button.on { background: var(--navy); color: #fff; }
+.abar { display: flex; gap: 10px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.quick { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 8px 8px 8px 14px; box-shadow: var(--sh); }
+.quick input { border: 0; outline: 0; flex: 1 1 260px; min-width: 0; height: 34px; font-size: 13.5px; background: transparent; }
+.quick .hint { display: flex; gap: 6px; flex-wrap: wrap; }
+.quick .hint code { font-family: var(--inter); font-size: 11.5px; padding: 2px 7px; border-radius: 6px; background: var(--soft); color: var(--fg-2); }
+.esp { display: flex; gap: 6px; flex-wrap: wrap; }
+.esp button { border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 5px 11px; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; color: var(--fg-2); }
+.esp button i { width: 8px; height: 8px; border-radius: 50%; }
+.esp button.on { border-color: var(--navy); color: var(--fg); box-shadow: inset 0 0 0 1px var(--navy); }
+
+.day2 { display: grid; gap: 16px; min-width: 0; }
+@media (min-width: 1100px) { .day2 { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); } }
+.tl { position: relative; display: grid; grid-template-columns: 48px minmax(0, 1fr); }
+.tl .hrs { display: grid; grid-auto-rows: 56px; font-size: 11px; color: var(--fg-3); }
+.tl .hrs span { transform: translateY(-7px); }
+.tl .lane { position: relative; display: grid; grid-auto-rows: 56px; }
+.tl .lane > div.slot { border-top: 1px dashed var(--line); }
+.blk { position: absolute; left: 6px; right: 6px; border-radius: 12px; padding: 7px 10px; font-size: 12.5px; display: grid; align-content: start; gap: 2px; overflow: hidden; cursor: pointer; border-left: 4px solid; }
+.blk b { font-weight: 600; line-height: 1.25; }
+.blk small { font-size: 11px; opacity: .8; }
+.blk.done b { text-decoration: line-through; opacity: .6; }
+.now { position: absolute; left: 0; right: 0; height: 2px; background: var(--red); z-index: 2; }
+.now::before { content: ""; position: absolute; left: -4px; top: -4px; width: 10px; height: 10px; border-radius: 50%; background: var(--red); }
+.tgroup { display: grid; gap: 6px; }
+.tgroup h3 { margin: 6px 0 0; font-size: 12px; font-weight: 700; color: var(--fg-2); display: flex; align-items: center; gap: 6px; }
+.task { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); cursor: pointer; min-width: 0; transition: border-color .12s, box-shadow .12s; }
+.task:hover { border-color: #cbd5e1; box-shadow: 0 4px 14px rgba(15,23,42,.06); }
+.task .chk { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #cbd5e1; flex: none; display: grid; place-items: center; background: var(--card); padding: 0; }
+.task .chk svg { width: 12px; height: 12px; color: #fff; opacity: 0; }
+.task.done .chk { background: var(--green); border-color: var(--green); }
+.task.done .chk svg { opacity: 1; }
+.task.done .tt b { text-decoration: line-through; color: var(--fg-3); }
+.task .tt { flex: 1; min-width: 0; display: grid; gap: 3px; }
+.task .tt b { font-size: 13px; font-weight: 600; }
+.task .tt .ln { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; font-size: 11.5px; color: var(--fg-2); }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
+.prio { display: inline-flex; width: 18px; height: 18px; flex: none; }
+.prio svg { width: 16px; height: 16px; }
+.top3 { display: grid; gap: 8px; }
+.top3 .t { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 12px; background: linear-gradient(90deg, var(--blue-tint), transparent); border: 1px solid #dbeafe; }
+.top3 .t b.n { width: 24px; height: 24px; border-radius: 8px; background: var(--blue); color: #fff; display: grid; place-items: center; font-size: 12px; flex: none; }
+.top3 .t span { font-size: 13px; font-weight: 600; flex: 1; min-width: 0; }
+
+.week { display: grid; gap: 10px; grid-template-columns: repeat(6, minmax(170px, 1fr)); overflow-x: auto; padding-bottom: 6px; }
+.wcol { background: var(--soft); border-radius: 16px; padding: 10px; display: grid; gap: 8px; align-content: start; min-height: 320px; border: 1px solid transparent; }
+.wcol.today { background: var(--blue-tint); border-color: #bfdbfe; }
+.wcol.over { border-color: var(--blue); border-style: dashed; }
+.wh { display: flex; justify-content: space-between; align-items: baseline; padding: 2px 4px; }
+.wh b { font-size: 13px; }
+.wh b span { font-size: 22px; font-weight: 800; margin-right: 6px; letter-spacing: -.02em; }
+.wh small { font-size: 11px; color: var(--fg-2); }
+.cap { height: 5px; border-radius: 999px; background: #e2e8f0; overflow: hidden; margin: 0 4px; }
+.cap i { display: block; height: 100%; border-radius: 999px; }
+.wcard { background: var(--card); border-radius: 12px; padding: 9px 10px; display: grid; gap: 5px; font-size: 12.5px; cursor: grab; box-shadow: 0 1px 2px rgba(15,23,42,.06); border-left: 4px solid; }
+.wcard:active { cursor: grabbing; }
+.wcard b { font-weight: 600; line-height: 1.3; }
+.wcard .ln { display: flex; gap: 6px; align-items: center; font-size: 11px; color: var(--fg-2); flex-wrap: wrap; }
+.wcard.done b { text-decoration: line-through; color: var(--fg-3); }
+.wcard.dragging { opacity: .4; }
+.prog { height: 4px; border-radius: 999px; background: var(--soft); overflow: hidden; }
+.prog i { display: block; height: 100%; background: var(--green); }
+.avs { display: inline-flex; }
+.avs i { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #fff; margin-left: -6px; font-style: normal; font-size: 9px; font-weight: 700; display: grid; place-items: center; background: var(--blue-tint); color: var(--blue); }
+.avs i:first-child { margin-left: 0; }
+
+.board { display: grid; gap: 12px; grid-template-columns: repeat(5, minmax(220px, 1fr)); overflow-x: auto; padding-bottom: 6px; }
+.bcol { background: var(--soft); border-radius: 16px; padding: 10px; display: grid; gap: 8px; align-content: start; min-height: 300px; border: 1px solid transparent; }
+.bcol.over { border-color: var(--blue); border-style: dashed; }
+.bh { display: flex; align-items: center; gap: 8px; padding: 2px 4px 4px; font-size: 13px; font-weight: 700; }
+.bh i { width: 10px; height: 10px; border-radius: 50%; }
+.bh small { margin-left: auto; font-size: 11.5px; font-weight: 700; color: var(--fg-2); background: var(--card); padding: 0 8px; border-radius: 999px; }
+
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: var(--card); box-shadow: -20px 0 50px rgba(15,23,42,.18); z-index: 30; display: grid; grid-template-rows: auto 1fr auto; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px); }
+.drawer .dh { padding: 18px 20px 12px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+.drawer .dh .row1 { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.drawer h3 { margin: 0; font-size: 18px; font-weight: 700; line-height: 1.3; }
+.drawer .db { overflow-y: auto; padding: 16px 20px; display: grid; gap: 16px; align-content: start; }
+.drawer dl { margin: 0; display: grid; grid-template-columns: 120px 1fr; gap: 10px; font-size: 13px; align-items: center; }
+.drawer dt { color: var(--fg-2); }
+.drawer dd { margin: 0; font-weight: 500; }
+.drawer .subs { display: grid; gap: 6px; }
+.drawer .subs label { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+.drawer .cm { display: grid; gap: 10px; }
+.drawer .cm div { font-size: 12.5px; background: var(--soft); border-radius: 10px; padding: 8px 10px; }
+.drawer .cm b { font-size: 12px; }
+.drawer .df { padding: 12px 20px; border-top: 1px solid var(--line); display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+.scrim { position: fixed; inset: 0; background: rgba(15,23,42,.35); z-index: 29; }
+.rec { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; color: var(--blue); font-weight: 600; }
+.rec svg { width: 12px; height: 12px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .view:not([hidden]) > * { animation: in .3s ease-out both; }
+  @keyframes in { from { transform: translateY(4px); } to { transform: none; } }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="layout">
+  <aside class="side" aria-label="Menú">
+    <div class="logo"><i></i>SUPRICOM</div>
+    <a class="nav" data-v="actividades" href="#actividades"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Actividades<span class="new">Mejorada</span></a>
+    <a class="nav" data-v="plan" href="#plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Plan de Contenido</a>
+    <a class="nav" data-v="frecuencia" href="#frecuencia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Frecuencia CPM</a>
+    <a class="nav" data-v="kpi" href="#kpi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>KPI de contenido<span class="new">Nuevo</span></a>
+    <a class="nav" data-v="competencia" href="#competencia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="5"/><circle cx="16" cy="15" r="5"/></svg>Competencia en redes<span class="new">Nuevo</span></a>
+    <a class="nav" data-v="flyers" href="#flyers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Banco de Flyers</a>
+    <div class="sep"></div>
+    <a class="nav" data-v="pop" href="#pop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8l-9-5-9 5v8l9 5 9-5z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg>Material POP</a>
+    <a class="nav" data-v="rotacion" href="#rotacion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Rotación de productos</a>
+    <a class="nav" data-v="catalogo" href="#catalogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/></svg>Catálogo</a>
+    <a class="nav" data-v="packing" href="#packing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Packing List</a>
+    <div class="user"><div class="av">JP</div><div><b>Jose Poggioli</b><small>MARKETING Y CONTENIDO</small></div></div>
+  </aside>
+
+  <main class="main outer">
+    <div class="top">
+      <span class="brand">SUPRICOM</span>
+      <span class="role"><b>Marketing y Contenido</b><span class="chip-was">antes AdminLeads</span></span>
+    </div>
+    <nav class="mnav" aria-label="Secciones" id="mnav"></nav>
+
+    <section class="view main" id="v-pop" hidden>
+      <div class="head">
+        <div><h1>Material POP</h1><p>Inventario de material publicitario en oficina y almacén.</p></div>
+      </div>
+      <div class="pop-top">
+        <div class="hero">
+          <span class="pg">Inventario total</span>
+          <div class="big num">5.556 <small>unidades · 36 productos activos</small></div>
+          <div class="bar"><i style="width:2%"></i></div>
+          <div class="lg"><span>● Oficina <b class="num">105</b></span><span>● Almacén <b class="num">5.451</b></span></div>
+        </div>
+        <div class="panel need">
+          <div class="panel-h"><h2>Necesitan atención</h2><span class="pill red">6</span></div>
+          <ul id="need"></ul>
+        </div>
+      </div>
+
+      <div class="ptabs" role="tablist" id="ptabs"></div>
+      <div id="ptab-body"></div>
+    </section>
+
+    <section class="view main" id="v-kpi" hidden>
+      <div class="head">
+        <div><h1><span class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>KPI de contenido <span class="newtag">Nuevo</span></h1>
+        <p>Cómo le va a lo que publicas en Instagram y a las campañas pagadas de Meta.</p></div>
+        <div class="filters">
+          <select class="sel" id="f-per" aria-label="Período"><option>Últimos 30 días</option><option>Este mes</option><option>Mes anterior</option><option>Últimos 90 días</option></select>
+          <select class="sel" id="f-cuenta" aria-label="Cuenta"><option>Supricom</option><option>Asta</option><option>Bluetti</option></select>
+        </div>
+      </div>
+      <div class="khero">
+        <div class="khero-top">
+          <div><small>Alcance · últimos 30 días</small><div class="big num">186,4 mil <span class="delta">▲ 12 %</span></div></div>
+          <div class="kstats">
+            <div class="kstat"><span>Visualizaciones</span><b class="num">412,9 mil</b><em>▲ 18 %</em></div>
+            <div class="kstat"><span>Interacciones</span><b class="num">11.236</b><em>▲ 7 %</em></div>
+            <div class="kstat"><span>Seguidores ganados</span><b class="num">+1.072</b><em>▲ 9 %</em></div>
+          </div>
+        </div>
+        <div class="area" id="k-area"></div>
+      </div>
+      <div class="kpis icons" id="kpis"></div>
+      <div class="panel">
+        <div class="panel-h"><h2>Tus mejores publicaciones</h2><small>por tasa de interacción, últimos 30 días</small></div>
+        <div class="gallery" id="gallery"></div>
+      </div>
+      <div class="grid2">
+        <div class="panel chart">
+          <div class="panel-h"><h2>Alcance por semana</h2><div class="legend"><span><i class="sw" style="background:#2563eb"></i>Orgánico</span><span><i class="sw" style="background:#93c5fd"></i>Pagado</span></div></div>
+          <div id="ch-semana"></div>
+          <div class="src">Fuente: <b>Instagram</b> (alcance de la cuenta) y <b>Meta Ads</b> (alcance por campaña)</div>
+        </div>
+        <div class="panel">
+          <div class="panel-h"><h2>¿Qué formato funciona mejor?</h2><small>tasa de interacción promedio</small></div>
+          <div id="formatos"></div>
+          <div class="panel-h" style="margin-top:6px"><h2>Mejor hora para publicar</h2><small>seguidores conectados, promedio</small></div>
+          <div class="chart" id="ch-horas"></div>
+          <div class="src">Fuente: <b>Instagram</b>, tipo de publicación y seguidores conectados por hora</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h2>Publicaciones</h2>
+          <select class="sel" id="f-orden" aria-label="Ordenar"><option value="tasa">Mejor tasa de interacción</option><option value="alcance">Más alcance</option><option value="fecha">Más recientes</option></select>
+        </div>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Publicación</th><th>Formato</th><th class="r">Alcance</th><th class="r">Vistas</th><th class="r">Me gusta</th><th class="r">Coment.</th><th class="r">Guardados</th><th class="r">Compartidos</th><th class="r">Tiempo visto</th><th class="r">Tasa</th></tr></thead>
+          <tbody id="posts"></tbody>
+        </table></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h2>Campañas pagadas</h2><small>antes en Dashboard Leads → Campañas</small></div>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Campaña</th><th>Objetivo</th><th class="r">Inversión</th><th class="r">Alcance</th><th class="r">Frecuencia</th><th class="r">CTR</th><th class="r">CPM</th><th class="r">Leads</th><th class="r">Costo por lead</th><th class="r">Ventas cerradas</th></tr></thead>
+          <tbody id="camps"></tbody>
+        </table></div>
+        <div class="filters"><button class="btn sm" data-t="Abre el informe mensual de redes que ya existe">Informe mensual de redes</button></div>
+      </div>
+    </section>
+
+    <section class="view main" id="v-competencia" hidden>
+      <div class="head">
+        <div><h1><span class="hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="5"/><circle cx="16" cy="15" r="5"/></svg></span>Competencia en redes <span class="newtag">Nuevo</span></h1>
+        <p>Tu cuenta frente a la de tus competidores en Instagram, con sus datos públicos.</p></div>
+        <div class="filters">
+          <select class="sel" id="f-cper" aria-label="Período"><option>Últimos 30 días</option><option>Últimos 90 días</option></select>
+          <button class="btn" data-t="Abre una ventana para escribir el @usuario de la cuenta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Agregar competidor</button>
+        </div>
+      </div>
+      <div class="podium">
+        <div><h2>Dónde estás frente a 4 competidores</h2><p>Puesto de @supricom_venezuela en cada medida, últimos 30 días.</p></div>
+        <div class="ranks" id="ranks"></div>
+      </div>
+      <div class="comp-grid" id="accs"></div>
+      <div class="grid2">
+        <div class="panel"><div class="panel-h"><h2>Publicaciones por semana</h2></div><div class="hbars" id="c-frec"></div></div>
+        <div class="panel"><div class="panel-h"><h2>Interacción promedio por publicación</h2><small>me gusta + comentarios</small></div><div class="hbars" id="c-int"></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h2>Sus publicaciones con más interacción</h2><small>últimos 30 días</small></div>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Publicación</th><th>Cuenta</th><th>Formato</th><th>Fecha</th><th class="r">Me gusta</th><th class="r">Comentarios</th><th></th></tr></thead>
+          <tbody id="c-top"></tbody>
+        </table></div>
+        <div class="src">Instagram no comparte el alcance ni las vistas de cuentas ajenas: solo seguidores, publicaciones, me gusta y comentarios.</div>
+      </div>
+    </section>
+
+    <section class="view main" id="v-rotacion" hidden>
+      <div class="head">
+        <div><h1>Rotación de productos</h1><p>Qué se vende rápido, qué está estancado y qué conviene empujar con contenido. Antes se llamaba «Dashboard».</p></div>
+        <div class="filters"><button class="btn sm">Excel</button><button class="btn sm">CSV</button></div>
+      </div>
+      <div class="chg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg><div>Las gráficas de marcas y categorías más vendidas quedan igual. Lo nuevo está en la tabla: la columna <b>Dinero parado</b>, la columna <b>Flyer</b> y el filtro <b>Sin flyer</b>.</div></div>
+      <div class="kpis">
+        <div class="kpi"><span>SKUs con movimiento</span><b class="num">1.505</b></div>
+        <div class="kpi c-green"><span>Alta rotación</span><b class="num">221</b></div>
+        <div class="kpi"><span>Rotación media</span><b class="num">306</b></div>
+        <div class="kpi c-red"><span>Baja o estancado</span><b class="num">978</b><em>$ 412.380 en dinero parado</em></div>
+      </div>
+      <div class="panel">
+        <div class="filters">
+          <input class="inp" id="r-q" placeholder="Buscar por SKU, nombre o marca" aria-label="Buscar">
+          <select class="sel" id="r-est" aria-label="Estado"><option value="">Cualquier estado</option><option value="baja">Baja o estancado</option><option value="media">Rotación media</option><option value="alta">Alta rotación</option></select>
+          <select class="sel" id="r-ord" aria-label="Ordenar"><option value="dinero">Más dinero parado</option><option value="dias">Más días sin venta</option><option value="cob">Mayor cobertura</option></select>
+          <button class="tog" id="r-flyer" aria-pressed="true"><i></i>Sin flyer</button>
+        </div>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>SKU</th><th>Producto</th><th>Marca</th><th class="r">Precio</th><th class="r">Stock</th><th class="r">Vendidas 30 d</th><th class="r">Cobertura</th><th class="r">Sin venta</th><th class="r">Dinero parado</th><th>Flyer</th><th>Estado</th></tr></thead>
+          <tbody id="rot"></tbody>
+        </table></div>
+        <div class="src">Dinero parado = stock × precio de venta. Flyer = el producto tiene al menos una imagen en el <b>Banco de Flyers</b>.</div>
+      </div>
+    </section>
+
+    <section class="view main" id="v-catalogo" hidden>
+      <div class="head">
+        <div><h1>Catálogo de Productos</h1><p><span id="cat-n">1.041</span> productos con stock · Valencia</p></div>
+        <div class="filters"><button class="btn blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Exportar</button></div>
+      </div>
+      <div class="chg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg><div>«Productos» se unió aquí. De esa sección se traen el <b>filtro por marca</b>, <b>Sin imagen</b> y la opción de ver también los productos <b>sin stock</b>.</div></div>
+      <div class="panel">
+        <div class="filters">
+          <select class="sel" id="c-sede" aria-label="Sede"><option>Valencia</option><option>Caracas</option><option>Todas las sedes</option></select>
+          <select class="sel" id="c-marca" aria-label="Marca"><option value="">Todas las marcas</option></select>
+          <input class="inp" id="c-q" placeholder="Buscar por nombre, código o código de barras" aria-label="Buscar">
+          <button class="tog" id="c-sinimg" aria-pressed="false"><i></i>Sin imagen</button>
+          <button class="tog" id="c-sinstk" aria-pressed="false"><i></i>Incluir sin stock</button>
+        </div>
+        <div class="chips" id="c-cats"></div>
+      </div>
+      <div class="prod-grid" id="prods"></div>
+    </section>
+
+    <section class="view main" id="v-packing" hidden>
+      <div class="head">
+        <div><h1>Packing List</h1><p>Mercancía que llegó y que va a llegar al almacén de Valencia. Ahora muestra si cada producto ya tiene flyer.</p></div>
+        <input class="inp" style="flex:0 1 320px" placeholder="Buscar producto o código" aria-label="Buscar producto">
+      </div>
+      <div class="pk">
+        <div class="panel">
+          <div class="panel-h"><h2>Noviembre 2026</h2><div class="legend"><span><i class="sw" style="background:#047857"></i>Llegó</span><span><i class="sw" style="background:#b45309"></i>Se está contando</span><span><i class="sw" style="background:#2563eb"></i>Va a llegar</span></div></div>
+          <div class="cal" id="cal"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-h"><h2 id="pk-title">—</h2><span id="pk-sum"></span></div>
+          <ul class="plist" id="pk-list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="view main" id="v-actividades" hidden>
+      <div class="ahero">
+        <div class="agreet">
+          <div>
+            <small>Miércoles, 25 de noviembre</small>
+            <h1>Hola, José</h1>
+            <p id="a-sub">Hoy tienes 5 tareas pendientes (unas 5 h) y 2 vencidas. La más importante: aprobar el guion del reel de UPS.</p>
+          </div>
+          <div class="aring" id="a-ring"></div>
+        </div>
+        <div class="acount" id="a-count"></div>
+      </div>
+
+      <div class="abar">
+        <div class="atabs" role="tablist" id="a-tabs"></div>
+        <div class="esp" id="a-esp"></div>
+      </div>
+
+      <div class="quick">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.4"><path d="M12 5v14M5 12h14"/></svg>
+        <input id="a-quick" placeholder="Agregar tarea: «Grabar reel Canon mañana 10:00 #contenido !alta» y Enter" aria-label="Agregar tarea">
+        <span class="hint"><code>@persona</code><code>#espacio</code><code>!prioridad</code><code>mañana 10:00</code><code>cada lunes</code></span>
+      </div>
+
+      <div id="a-body"></div>
+    </section>
+    <div class="scrim" id="a-scrim" hidden></div>
+    <aside class="drawer" id="a-drawer" hidden aria-label="Detalle de la tarea"></aside>
+
+    <section class="view main" id="v-same" hidden>
+      <div class="panel same">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <b id="same-t">Sin cambios</b>
+        <p id="same-p">Esta sección queda igual que hoy.</p>
+      </div>
+    </section>
+
+    <p class="note-sim">Mockup con datos de ejemplo: clientes, competidores y cifras de contenido son inventados.</p>
+  </main>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+
+const SECCIONES = [
+  { v: "actividades", n: "Actividades" }, { v: "plan", n: "Plan de Contenido" }, { v: "frecuencia", n: "Frecuencia CPM" },
+  { v: "kpi", n: "KPI de contenido" }, { v: "competencia", n: "Competencia" }, { v: "flyers", n: "Banco de Flyers" },
+  { v: "pop", n: "Material POP" }, { v: "rotacion", n: "Rotación" }, { v: "catalogo", n: "Catálogo" }, { v: "packing", n: "Packing List" },
+];
+const SIN_CAMBIOS = {
+  plan: ["Plan de Contenido", "Queda igual que hoy: es el HTML embebido del plan."],
+  frecuencia: ["Frecuencia CPM", "Queda igual que hoy: es el HTML embebido de frecuencia."],
+  flyers: ["Banco de Flyers", "Queda igual que hoy."],
+};
+
+
+const NEED = [
+  { n: "CHEMISES TALLA XL", s: 0, w: 0, t: "red" }, { n: "BOLÍGRAFOS SUPRICOM", s: 2, w: 1.5, t: "red" },
+  { n: "BOLSAS SUPRICOM AZUL", s: 140, w: 2, t: "amber" }, { n: "CAMISAS COLOR BLANCO L", s: 2, w: 1, t: "amber" },
+  { n: "BANDERINES HIKVISION", s: 15, w: 2.5, t: "amber" }, { n: "AGENDA CON BOLÍGRAFOS", s: 5, w: 3, t: "amber" },
+];
+const PTABS = [
+  { k: "catalogo", n: "Catálogo", c: 36 }, { k: "inventario", n: "Inventario" }, { k: "entradas", n: "Entradas" },
+  { k: "salidas", n: "Salidas" }, { k: "historial", n: "Historial" }, { k: "solicitudes", n: "Solicitudes" },
+  { k: "clientes", n: "Clientes por marca" }, { k: "sugeridos", n: "Sugeridos", c: 5, nuevo: true }, { k: "alertas", n: "Alertas", c: 6, red: true },
+];
+const SUG = [
+  { c: "Distribuidora Tecno Centro, C.A.", ciu: "Valencia", ven: "Vendedor 1", m: "fuerte", sc: 92, mon: 18400, tend: "+34 %", fac: 11, pop: "Nunca", marca: "CANON", mat: "Exhibidor de mostrador CANON", stk: 12,
+    why: "Es el <b>3.er cliente</b> que más compra CANON en 90 días y <b>nunca ha recibido POP</b>." },
+  { c: "Inversiones Ofimática Lara", ciu: "Barquisimeto", ven: "Vendedor 3", m: "crece", sc: 85, mon: 9700, tend: "+58 %", fac: 7, pop: "Hace 140 días", marca: "HIKVISION", mat: "Banderines HIKVISION", stk: 15,
+    why: "Sus compras de HIKVISION <b>subieron 58 %</b> frente a su promedio y el último POP fue hace <b>140 días</b>." },
+  { c: "Papelería El Estudiante", ciu: "Maracay", ven: "Vendedor 2", m: "sinpop", sc: 78, mon: 7300, tend: "+4 %", fac: 14, pop: "Hace 210 días", marca: "SUPRICOM", mat: "Bolsas reciclables SUPRICOM", stk: 2294, propia: true,
+    why: "Compra <b>cada dos semanas</b> sin falta y lleva <b>7 meses sin material</b>. Material de marca propia: se usan sus compras totales." },
+  { c: "Comercial Redes y Más", ciu: "Caracas", ven: "Vendedor 4", m: "recuperar", sc: 71, mon: 6100, tend: "−41 %", fac: 4, pop: "Hace 95 días", marca: "ASTA", mat: "Banderines oso ASTA", stk: 85,
+    why: "Era cliente fuerte de ASTA y <b>bajó 41 %</b>. Un detalle de POP puede ayudar a reactivarlo." },
+  { c: "Tienda Digital Puerto Cabello", ciu: "Puerto Cabello", ven: "Vendedor 1", m: "fuerte", sc: 69, mon: 8800, tend: "+12 %", fac: 6, pop: "Nunca", marca: "HAVIT", mat: "Bolsa reciclable HAVIT", stk: 4,
+    why: "Compra bien HAVIT y <b>nunca ha recibido POP</b>. Quedan pocas bolsas HAVIT." },
+];
+const MOTIVOS = [
+  { k: "todos", n: "Todos" }, { k: "fuerte", n: "Compra fuerte y nunca recibió POP" },
+  { k: "crece", n: "Está creciendo" }, { k: "sinpop", n: "Mucho tiempo sin POP" }, { k: "recuperar", n: "Para reactivar" },
+];
+const HIST = [
+  { f: "02-sep-2026", c: "Al Giorno Cyber Café", mat: "Exhibidor CANON", u: 1, marca: "CANON", a: 6200, d: 9100 },
+  { f: "15-ago-2026", c: "Corporación Electro Mall", mat: "Banderines HIKVISION", u: 10, marca: "HIKVISION", a: 4100, d: 5300 },
+  { f: "30-jul-2026", c: "Inversiones Jhaimar", mat: "Bolsas reciclables ASTA", u: 50, marca: "ASTA", a: 3900, d: 3700 },
+  { f: "10-jul-2026", c: "Papelería Central", mat: "Agenda con bolígrafos APC", u: 5, marca: "APC", a: 1800, d: 2600 },
+  { f: "20-oct-2026", c: "Tecno Hogar Valencia", mat: "Bolsas SUPRICOM", u: 30, marca: "SUPRICOM", a: 2500, d: null },
+];
+
+
+const ALCANCE_DIARIO = [4.1, 4.6, 5.2, 4.8, 5.9, 6.4, 5.1, 4.9, 5.6, 6.8, 7.2, 6.1, 5.4, 5.8, 6.6, 7.9, 8.4, 6.9, 6.2, 6.0, 7.1, 8.8, 9.6, 7.4, 6.8, 7.7, 8.9, 9.9, 8.1, 7.6]; // miles por día
+const KPIS = [
+  { n: "Tasa de interacción", v: "6,0 %", d: "▼ 0,3 puntos", up: false, ic: "heart", c: "red" },
+  { n: "Visitas al perfil", v: "9.840", d: "▲ 4 %", up: true, ic: "user", c: "blue" },
+  { n: "Clics al enlace", v: "1.212", d: "▲ 15 %", up: true, ic: "link", c: "green" },
+  { n: "Inversión en campañas", v: "$ 640", d: "248 leads · $ 2,58 por lead", ic: "coin", c: "amber" },
+];
+const KICON = {
+  heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>',
+  user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
+  link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>',
+  coin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .8-3 2s1.3 1.7 3 2 3 .8 3 2-1.3 2-3 2c-1.4 0-2.5-.5-3-1.5M12 6v12"/></svg>',
+  reel: '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M3 8h18M8 3l3 5M14 3l3 5"/><path d="M10 12v5l4-2.5z" fill="currentColor"/></svg>',
+  carrusel: '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="3" width="15" height="15" rx="3"/><path d="M3 7v11a3 3 0 0 0 3 3h11"/></svg>',
+  foto: '<svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>',
+};
+const SEMANAS = [
+  { s: "6 oct", o: 31, p: 12 }, { s: "13 oct", o: 34, p: 10 }, { s: "20 oct", o: 29, p: 18 }, { s: "27 oct", o: 36, p: 15 },
+  { s: "3 nov", o: 38, p: 9 }, { s: "10 nov", o: 41, p: 14 }, { s: "17 nov", o: 39, p: 20 }, { s: "24 nov", o: 45, p: 17 },
+];
+const FORMATOS = [ { n: "Reel", v: 7.8 }, { n: "Carrusel", v: 6.1 }, { n: "Foto", v: 3.4 }, { n: "Historia", v: 2.2 } ];
+const HORAS = [3, 2, 1, 1, 1, 2, 5, 9, 14, 18, 20, 22, 26, 24, 19, 18, 20, 23, 28, 34, 38, 33, 21, 9]; // % de seguidores conectados, 0–23 h
+const POSTS = [
+  { t: "Cómo elegir tu UPS", f: "Reel", d: "22 nov", o: 22, al: 24800, vi: 61200, mg: 1640, co: 88, gu: 310, sh: 205, tv: "0:14" },
+  { t: "Mini PC N100: ya llegó", f: "Carrusel", d: "19 nov", o: 19, al: 15100, vi: 22900, mg: 920, co: 64, gu: 141, sh: 57 },
+  { t: "Ofertas Black Friday para oficina", f: "Reel", d: "21 nov", o: 21, al: 31200, vi: 70400, mg: 1710, co: 120, gu: 96, sh: 180, tv: "0:09" },
+  { t: "Así trabajamos en Valencia", f: "Foto", d: "17 nov", o: 17, al: 8400, vi: 9900, mg: 280, co: 12, gu: 6, sh: 4 },
+  { t: "Silla ergonómica: 3 ajustes", f: "Carrusel", d: "14 nov", o: 14, al: 12700, vi: 19800, mg: 610, co: 31, gu: 98, sh: 40 },
+];
+const CAMPS = [
+  { n: "Leads impresoras noviembre", o: "Clientes potenciales", g: 260, al: 98400, fr: 1.9, ctr: 1.8, cpm: 1.4, l: 142, v: 19 },
+  { n: "Black Friday reels", o: "Interacción", g: 220, al: 121000, fr: 1.4, ctr: 1.1, cpm: 1.3, l: 61, v: 7 },
+  { n: "Mini PC tráfico web", o: "Tráfico", g: 160, al: 54300, fr: 2.3, ctr: 2.4, cpm: 1.3, l: 45, v: 5 },
+];
+
+
+const CUENTAS = [
+  { n: "@supricom_venezuela", me: true, seg: 48200, dseg: 1072, pub: 4.5, int: 245 },
+  { n: "@competidor_a", seg: 91300, dseg: 640, pub: 7.0, int: 198 },
+  { n: "@competidor_b", seg: 35600, dseg: 1310, pub: 5.5, int: 312 },
+  { n: "@competidor_c", seg: 22100, dseg: 180, pub: 2.0, int: 96 },
+  { n: "@competidor_d", seg: 15800, dseg: 420, pub: 3.5, int: 141 },
+];
+const CTOP = [
+  { t: "Sorteo de audífonos por aniversario", a: "@competidor_b", f: "Reel", d: "18 nov", mg: 4120, co: 2890 },
+  { t: "Comparativa de impresoras de tinta continua", a: "@competidor_a", f: "Reel", d: "12 nov", mg: 2240, co: 145 },
+  { t: "Setup de oficina en casa por menos de $ 300", a: "@competidor_b", f: "Carrusel", d: "9 nov", mg: 1980, co: 96 },
+  { t: "Llegaron laptops gamer", a: "@competidor_d", f: "Foto", d: "20 nov", mg: 870, co: 41 },
+];
+
+
+const ROT = [
+  { sku: "SIL-ERG-01", n: "Silla ergonómica malla negra", m: "GENERAL", p: 129.9, st: 64, v30: 2, cob: 210, dsv: 38, fl: false, e: "baja" },
+  { sku: "UPS-1000", n: "UPS 1000 VA interactiva", m: "FORZA", p: 89.5, st: 41, v30: 3, cob: 190, dsv: 21, fl: true, e: "baja" },
+  { sku: "AUD-GMR-RGB", n: "Audífonos gamer RGB", m: "HAVIT", p: 24.9, st: 120, v30: 9, cob: 185, dsv: 6, fl: false, e: "baja" },
+  { sku: "PRY-PJ223", n: "Proyector Smart PJ223 Plus", m: "HAVIT", p: 299.5, st: 26, v30: 1, cob: 240, dsv: 47, fl: false, e: "baja" },
+  { sku: "MON-27C", n: "Monitor 27\" curvo 165 Hz", m: "ACER", p: 219, st: 18, v30: 2, cob: 200, dsv: 29, fl: true, e: "baja" },
+  { sku: "CAM-IP4", n: "Cámara IP 4 MP exterior", m: "HIKVISION", p: 62, st: 55, v30: 4, cob: 205, dsv: 15, fl: false, e: "baja" },
+  { sku: "TON-85A", n: "Tóner compatible 85A", m: "ASTA", p: 9, st: 1840, v30: 410, cob: 130, dsv: 1, fl: true, e: "media" },
+  { sku: "CB435A", n: "Tóner CB435A / CB436A / CE285A", m: "ASTA", p: 8, st: 10751, v30: 6342, cob: 63, dsv: 0, fl: true, e: "alta" },
+];
+
+
+const CATS = ["Todas", "Almacenamiento", "Audífono", "Bolsos y mochilas", "Cámaras", "Consumibles", "Impresora", "Laptop", "Monitores", "Proyectores", "Routering", "UPS y reguladores"];
+const PRODS = [
+  { n: "HAVIT masajeador de ojos Intelligent Air Compression gris", c: "BR1680", m: "HAVIT", cat: "General", p: 51.45, s: 17, img: false },
+  { n: "HAVIT Air Conduction Headphones Freego Pro beige", c: "ES53T-BE", m: "HAVIT", cat: "Audífono", p: 15.45, s: 30, img: true },
+  { n: "HAVIT Air Conduction Headphones Freego Pro negro", c: "ES53T-BK", m: "HAVIT", cat: "Audífono", p: 15.45, s: 51, img: true },
+  { n: "HAVIT Smart Projector PJ223 Plus 22000 lúmenes", c: "PJ223-PLUS", m: "HAVIT", cat: "Proyectores", p: 299.5, s: 26, img: true },
+  { n: "Access point TP-Link TL-WA801ND 300 Mbps", c: "TL-WA801ND", m: "TP-LINK", cat: "Routering", p: 17.71, s: 12, img: true },
+  { n: "Laptop Acer Aspire 5 Core i5 16 GB", c: "A515-58", m: "ACER", cat: "Laptop", p: 689, s: 8, img: true },
+  { n: "Monitor Acer 24\" IPS 100 Hz", c: "SA242Y", m: "ACER", cat: "Monitores", p: 119, s: 0, img: true },
+  { n: "Cámara IP Hikvision 4 MP exterior", c: "DS-2CD1043", m: "HIKVISION", cat: "Cámaras", p: 62, s: 55, img: false },
+  { n: "Tóner compatible ASTA 85A", c: "AS-85A", m: "ASTA", cat: "Consumibles", p: 9, s: 1840, img: true },
+  { n: "UPS Forza 1000 VA interactiva", c: "NT-1012U", m: "FORZA", cat: "UPS y reguladores", p: 89.5, s: 41, img: false },
+];
+
+
+const LLEGADAS = {
+  12: { e: "ok", t: "Llegó 9", items: [
+    { n: "Mini PC Intel N100 16 GB", c: "MPC-N100", q: 25, fl: "listo" }, { n: "Teclado inalámbrico ASTA", c: "AS-KB20", q: 120, fl: "listo" },
+    { n: "Mouse gamer HAVIT MS1027", c: "MS1027", q: 80, fl: "no" } ] },
+  19: { e: "ok", t: "Llegó 12", items: [
+    { n: "Impresora multifuncional tinta continua", c: "L3250", q: 30, fl: "no" }, { n: "Monitor 27\" curvo 165 Hz", c: "MON-27C", q: 18, fl: "listo" },
+    { n: "Cámara IP 4 MP exterior", c: "DS-2CD1043", q: 55, fl: "pedido" }, { n: "Silla ergonómica malla negra", c: "SIL-ERG-01", q: 40, fl: "no" } ] },
+  26: { e: "cnt", t: "Contando", items: [
+    { n: "Proyector Smart PJ223 Plus", c: "PJ223-PLUS", q: 20, fl: "listo" }, { n: "UPS 1500 VA online", c: "UPS-1500", q: 15, fl: "no" } ] },
+  28: { e: "va", t: "Llegan 2", items: [
+    { n: "Laptop Acer Aspire 5 Core i5 16 GB", c: "A515-58", q: 20, fl: "no" }, { n: "Tóner compatible ASTA 85A", c: "AS-85A", q: 500, fl: "listo" } ] },
+};
+
+
+const $ = (s) => document.querySelector(s);
+const fmt = (n) => n.toLocaleString("es-VE");
+const usd = (n) => "$ " + n.toLocaleString("es-VE", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+const dec = (n, d = 1) => n.toFixed(d).replace(".", ",");
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.hidden = false;
+  clearTimeout(toast.h); toast.h = setTimeout(() => { t.hidden = true; }, 2600);
+}
+document.addEventListener("click", (e) => { const b = e.target.closest("[data-t]"); if (b) toast(b.dataset.t); });
+function hbars(el, rows, suf = " %", meKey) {
+  const max = Math.max(...rows.map((r) => r.v));
+  el.innerHTML = rows.map((r) => `<div class="hb"><span>${r.n}</span><div class="track"><i class="${meKey && r.me ? "me" : ""}" style="width:${(r.v / max) * 100}%"></i></div><b>${typeof r.v === "number" && !Number.isInteger(r.v) ? dec(r.v) : fmt(r.v)}${suf}</b></div>`).join("");
+}
+const ICON = {
+  warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>',
+  box: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 16V8l-9-5-9 5v8l9 5 9-5z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg>',
+  img: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>',
+};
+
+
+$("#need").innerHTML = NEED.map((x) => {
+  const sem = x.w ? Math.floor(x.s / x.w) : 0;
+  const txt = x.s === 0 ? "Agotado" : sem <= 1 ? "Se acaba esta semana" : `Alcanza para ${sem} semanas`;
+  return `<li><span class="ic ${x.t}">${ICON.warn}</span><div class="txt"><b>${x.n}</b><small>${txt}</small></div><div class="weeks num">${fmt(x.s)}<small>uds</small></div></li>`;
+}).join("");
+
+let ptab = "sugeridos", motivo = "todos";
+const descartados = new Set();
+function renderPtabs() {
+  $("#ptabs").innerHTML = PTABS.map((t) => `<button role="tab" aria-selected="${t.k === ptab}" class="${t.k === ptab ? "on" : ""}" data-p="${t.k}">${t.n}${t.c ? ` <span class="cnt ${t.red ? "red" : ""}">${t.c}</span>` : ""}${t.nuevo ? ' <span class="newtag">Nuevo</span>' : ""}</button>`).join("");
+}
+function ring(sc) {
+  const r = 23, c = 2 * Math.PI * r;
+  return `<svg viewBox="0 0 54 54" aria-hidden="true"><circle cx="27" cy="27" r="${r}" fill="none" stroke="#e2e8f0" stroke-width="5"/><circle cx="27" cy="27" r="${r}" fill="none" stroke="#2563eb" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(sc / 100) * c} ${c}"/></svg>`;
+}
+function bodySugeridos() {
+  const vivos = SUG.filter((s) => !descartados.has(s.c));
+  const chips = MOTIVOS.map((m) => {
+    const n = m.k === "todos" ? vivos.length : vivos.filter((s) => s.m === m.k).length;
+    return `<button class="chip ${m.k === motivo ? "on" : ""}" data-k="${m.k}">${m.n} <i>${n}</i></button>`;
+  }).join("");
+  const rows = vivos.filter((s) => motivo === "todos" || s.m === motivo);
+  const cards = rows.length ? rows.map((s) => `<article class="card">
+      <div class="card-top"><div><h3>${s.c}</h3><small>${s.ciu} · ${s.ven}</small></div>
+        <div class="ring" title="Prioridad sobre 100">${ring(s.sc)}<b class="num">${s.sc}</b></div></div>
+      <p class="why">${s.why}</p>
+      <div class="facts">
+        <div><small>${s.propia ? "Compras totales" : "Compras de " + s.marca}, 90 días</small><b class="num">${usd(s.mon)}</b></div>
+        <div><small>Frente a su promedio</small><b class="num ${s.tend.startsWith("−") ? "down" : "up"}">${s.tend}</b></div>
+        <div><small>Facturas en 90 días</small><b class="num">${s.fac}</b></div>
+        <div><small>Último POP entregado</small><b>${s.pop}</b></div>
+      </div>
+      <div class="popsug"><span class="thumb">POP</span><span>Material sugerido: <b>${s.mat}</b></span><span class="pill ${s.stk < 10 ? "amber" : "green"}">${fmt(s.stk)} disponibles</span></div>
+      <div class="acts">
+        <button class="btn sm" data-a="desc" data-c="${s.c}">Descartar 30 días</button>
+        <button class="btn sm" data-t="Abre el detalle de compras de Clientes por marca">Ver compras</button>
+        <button class="btn sm primary" data-t="Abre Salidas con el cliente y el material ya cargados">Preparar entrega</button>
+      </div></article>`).join("")
+    : `<div class="panel"><b>No quedan sugerencias con este motivo.</b><span class="src">La lista se recalcula cada día.</span></div>`;
+  return `<div class="main" style="gap:14px"><div class="panel-h"><div class="chips">${chips}</div>
+    <div class="filters"><select class="sel" aria-label="Marca del material" id="s-marca"><option>Todas las marcas con POP</option><option>CANON</option><option>HIKVISION</option><option>ASTA</option><option>HAVIT</option><option>SUPRICOM</option></select>
+    <select class="sel" aria-label="Ciudad" id="s-ciu"><option>Todas las ciudades</option><option>Valencia</option><option>Caracas</option><option>Maracay</option></select></div></div>
+    <div class="sug">${cards}</div></div>`;
+}
+function bodyAlertas() {
+  return `<div class="panel"><div class="panel-h"><h2>Alertas de stock POP</h2><small>stock mínimo por producto + cuánto alcanza</small></div>
+    <div class="tbl-wrap"><table><thead><tr><th>Producto</th><th class="r">Stock libre</th><th class="r">Mínimo</th><th class="r">Salen por semana</th><th class="r">Alcanza para</th><th></th></tr></thead><tbody>
+    ${NEED.map((x) => { const sem = x.w ? Math.floor(x.s / x.w) : 0; const min = Math.max(5, Math.ceil(x.w * 4));
+      return `<tr><td><b>${x.n}</b></td><td class="r">${fmt(x.s)}</td><td class="r">${min}</td><td class="r">${x.w ? dec(x.w) : "—"}</td><td class="r"><span class="pill ${x.s === 0 || sem <= 1 ? "red" : "amber"}">${x.s === 0 ? "Agotado" : sem <= 1 ? "Esta semana" : sem + " semanas"}</span></td><td class="r"><button class="btn sm" data-t="Abre el producto para editar su stock mínimo">Editar mínimo</button></td></tr>`; }).join("")}
+    </tbody></table></div><div class="src">Salen por semana = salidas de las últimas 12 semanas ÷ 12. Alerta cuando el stock libre queda por debajo del mínimo o alcanza para 4 semanas o menos.</div></div>`;
+}
+function bodyHistorial() {
+  return `<div class="panel"><div class="panel-h"><h2>Historial · Efecto del POP</h2><small>compras de la marca 90 días antes y después de cada entrega a cliente</small></div>
+    <div class="tbl-wrap"><table><thead><tr><th>Fecha</th><th>Cliente</th><th>Material</th><th class="r">Uds</th><th class="r">90 días antes</th><th class="r">90 días después</th><th>Efecto</th></tr></thead><tbody>
+    ${HIST.map((h) => { let ef = '<span class="pill gray">Aún no cumple 90 días</span>';
+      if (h.d != null) { const p = Math.round(((h.d - h.a) / h.a) * 100); const mx = Math.max(h.a, h.d);
+        ef = `<span class="efx"><span class="mini"><i style="height:${(h.a / mx) * 22}px;background:#cbd5e1"></i><i style="height:${(h.d / mx) * 22}px;background:${p >= 0 ? "#2563eb" : "#dc2626"}"></i></span><b class="${p >= 0 ? "up" : "down"}">${p >= 0 ? "+" : ""}${p} %</b></span>`; }
+      return `<tr><td>${h.f}</td><td><b>${h.c}</b></td><td>${h.mat}</td><td class="r">${h.u}</td><td class="r">${usd(h.a)}</td><td class="r">${h.d != null ? usd(h.d) : "—"}</td><td>${ef}</td></tr>`; }).join("")}
+    </tbody></table></div>
+    <div class="kpis" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+      <div class="kpi"><span>Entregas medidas (12 meses)</span><b class="num">48</b></div>
+      <div class="kpi c-green"><span>Clientes que compraron más</span><b class="num">31 de 48</b></div>
+      <div class="kpi"><span>Variación promedio</span><b class="num up">+22 %</b></div>
+      <div class="kpi"><span>Mejor material</span><b style="font-size:15px">Exhibidor CANON</b><em>+47 % promedio</em></div>
+    </div>
+    <div class="src">Es una señal, no una prueba: el cliente pudo comprar más por otras razones. El resto del historial (entradas, salidas y ajustes) queda igual.</div></div>`;
+}
+function renderPbody() {
+  let html;
+  if (ptab === "sugeridos") html = bodySugeridos();
+  else if (ptab === "alertas") html = bodyAlertas();
+  else if (ptab === "historial") html = bodyHistorial();
+  else html = `<div class="panel same"><b>${PTABS.find((t) => t.k === ptab).n}</b><p>Esta pestaña queda igual que hoy. Lo nuevo de Material POP está en <b>Sugeridos</b>, <b>Historial</b> y <b>Alertas</b>.</p></div>`;
+  $("#ptab-body").innerHTML = html;
+}
+$("#ptabs").addEventListener("click", (e) => { const b = e.target.closest("button[data-p]"); if (!b) return; ptab = b.dataset.p; renderPtabs(); renderPbody(); });
+$("#ptab-body").addEventListener("click", (e) => {
+  const k = e.target.closest("button[data-k]");
+  if (k) { motivo = k.dataset.k; renderPbody(); return; }
+  const d = e.target.closest("button[data-a='desc']");
+  if (d) { descartados.add(d.dataset.c); renderPbody(); toast(`${d.dataset.c} no aparecerá por 30 días`); }
+});
+renderPtabs(); renderPbody();
+
+
+function spark(vals, light) {
+  const W = 120, H = 26, min = Math.min(...vals), max = Math.max(...vals), r = max - min || 1;
+  const pts = vals.map((v, i) => [(i / (vals.length - 1)) * W, H - 3 - ((v - min) / r) * (H - 6)]);
+  const line = pts.map((p) => p.join(",")).join(" ");
+  const col = light ? "#93c5fd" : "#2563eb", last = pts[pts.length - 1];
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,${H} ${line} ${W},${H}" fill="${col}" fill-opacity=".15"/><polyline points="${line}" fill="none" stroke="${col}" stroke-width="2" vector-effect="non-scaling-stroke"/><circle cx="${last[0]}" cy="${last[1]}" r="2.5" fill="${col}"/></svg>`;
+}
+$("#kpis").innerHTML = KPIS.map((k) => `<div class="kpi"><span class="ki ic ${k.c}">${KICON[k.ic]}</span><span>${k.n}</span><b class="num">${k.v}</b><em class="${k.up === true ? "up" : k.up === false ? "down" : ""}">${k.d}</em></div>`).join("");
+(function () { // área de alcance diario en el héroe (escala 0–12 mil)
+  const W = 900, H = 110, max = 12, n = ALCANCE_DIARIO.length;
+  const pts = ALCANCE_DIARIO.map((v, i) => [(i / (n - 1)) * W, H - 8 - (v / max) * (H - 16)]);
+  const line = pts.map((p) => p.map((x) => x.toFixed(1)).join(",")).join(" "), last = pts[n - 1];
+  $("#k-area").innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Alcance diario de los últimos 30 días, entre 4 y 10 mil por día">
+    <defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#38bdf8" stop-opacity=".55"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/></linearGradient></defs>
+    <polygon points="0,${H} ${line} ${W},${H}" fill="url(#ga)"/><polyline points="${line}" fill="none" stroke="#7dd3fc" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
+    <circle cx="${last[0] - 4}" cy="${last[1]}" r="5" fill="#fff"/></svg>`;
+})();
+(function () { // dona de formatos
+  const cols = ["#2563eb", "#0f172a", "#93c5fd", "#38bdf8"], tot = FORMATOS.reduce((a, f) => a + f.v, 0);
+  const r = 52, C = 2 * Math.PI * r; let off = 0, segs = "";
+  FORMATOS.forEach((f, i) => { const len = (f.v / tot) * C; segs += `<circle cx="70" cy="70" r="${r}" fill="none" stroke="${cols[i]}" stroke-width="20" stroke-dasharray="${len - 2} ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)"/>`; off += len; });
+  $("#formatos").innerHTML = `<div class="donut-wrap"><svg viewBox="0 0 140 140" role="img" aria-label="Tasa de interacción por formato">${segs}<text x="70" y="66" text-anchor="middle" font-size="22" font-weight="800" fill="#0f172a">Reel</text><text x="70" y="84" text-anchor="middle" font-size="10.5" fill="#475569">el que más rinde</text></svg>
+    <div class="dleg">${FORMATOS.map((f, i) => `<div><i style="background:${cols[i]}"></i><span>${f.n}</span><b>${dec(f.v)} %</b></div>`).join("")}</div></div>`;
+})();
+(function () { // galería de mejores publicaciones
+  const rows = POSTS.map((p) => ({ ...p, tasa: ((p.mg + p.co + p.gu + p.sh) / p.al) * 100 })).sort((a, b) => b.tasa - a.tasa).slice(0, 4);
+  const mx = rows[0].tasa;
+  $("#gallery").innerHTML = rows.map((p, i) => `<article class="gpost"><div class="cover c-${p.f.toLowerCase()}">${KICON[p.f.toLowerCase()] || ""}<span class="rank">${i + 1}</span><span class="fmt">${p.f}</span><span class="ttl">${p.t}</span></div>
+    <div class="rate-bar"><i style="width:${(p.tasa / mx) * 100}%"></i></div>
+    <div class="meta"><span><b>${dec(p.tasa)} %</b>tasa</span><span><b>${(p.al / 1000).toFixed(1).replace(".", ",")} mil</b>alcance</span><span><b>${fmt(p.gu + p.sh)}</b>guardados</span></div></article>`).join("");
+})();
+(function () { // alcance semanal apilado, eje 0–70 mil
+  const W = 640, H = 230, L = 46, R = 10, T = 14, B = 28, max = 70;
+  const y = (v) => T + (H - T - B) * (1 - v / max), bw = (W - L - R) / SEMANAS.length;
+  let g = "";
+  for (let t = 0; t <= max; t += 10) g += `<line x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}" stroke="#e2e8f0"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end" font-size="11" fill="#94a3b8">${t} mil</text>`;
+  SEMANAS.forEach((s, i) => {
+    const x = L + i * bw + bw * .2, w = bw * .6;
+    g += `<rect x="${x}" y="${y(s.o)}" width="${w}" height="${y(0) - y(s.o)}" fill="#2563eb"/><rect x="${x}" y="${y(s.o + s.p)}" width="${w}" height="${y(s.o) - y(s.o + s.p)}" fill="#93c5fd"/>`;
+    if (i === SEMANAS.length - 1) g += `<text x="${x + w / 2}" y="${y(s.o + s.p) - 6}" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">${s.o + s.p} mil</text>`;
+    g += `<text x="${x + w / 2}" y="${H - 9}" text-anchor="middle" font-size="11" fill="#475569">${s.s}</text>`;
+  });
+  $("#ch-semana").innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Alcance semanal orgánico y pagado, en miles">${g}</svg>`;
+})();
+(function () { // seguidores conectados por hora, eje 0–40 %
+  const W = 640, H = 150, L = 34, R = 8, T = 16, B = 24, max = 40;
+  const y = (v) => T + (H - T - B) * (1 - v / max), bw = (W - L - R) / 24;
+  const best = HORAS.indexOf(Math.max(...HORAS));
+  let g = "";
+  for (let t = 0; t <= max; t += 20) g += `<line x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}" stroke="#e2e8f0"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end" font-size="10" fill="#94a3b8">${t} %</text>`;
+  HORAS.forEach((v, h) => {
+    const x = L + h * bw + bw * .15, w = bw * .7;
+    g += `<rect x="${x}" y="${y(v)}" width="${w}" height="${y(0) - y(v)}" rx="2" fill="${h === best ? "#0f172a" : "#93c5fd"}"/>`;
+    if (h % 3 === 0) g += `<text x="${x + w / 2}" y="${H - 7}" text-anchor="middle" font-size="10" fill="#475569">${h} h</text>`;
+    if (h === best) g += `<text x="${x + w / 2}" y="${y(v) - 5}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0f172a">${h}:00</text>`;
+  });
+  $("#ch-horas").innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Porcentaje de seguidores conectados por hora; el pico es a las ${best}:00">${g}</svg>`;
+})();
+function renderPosts() {
+  const o = $("#f-orden").value;
+  const rows = POSTS.map((p) => ({ ...p, tasa: ((p.mg + p.co + p.gu + p.sh) / p.al) * 100 }));
+  rows.sort(o === "tasa" ? (a, b) => b.tasa - a.tasa : o === "alcance" ? (a, b) => b.al - a.al : (a, b) => b.o - a.o);
+  const mx = Math.max(...rows.map((r) => r.tasa));
+  $("#posts").innerHTML = rows.map((p) => `<tr><td><div class="post"><span class="thumb">${p.f.toUpperCase()}</span><div><b>${p.t}</b><small>${p.d}</small></div></div></td><td>${p.f}</td>
+    <td class="r">${fmt(p.al)}</td><td class="r">${fmt(p.vi)}</td><td class="r">${fmt(p.mg)}</td><td class="r">${fmt(p.co)}</td><td class="r">${fmt(p.gu)}</td><td class="r">${fmt(p.sh)}</td><td class="r">${p.tv || "—"}</td>
+    <td class="r"><span class="rate"><i style="width:${(p.tasa / mx) * 40}px"></i><b>${dec(p.tasa)} %</b></span></td></tr>`).join("");
+}
+$("#f-orden").addEventListener("change", renderPosts); renderPosts();
+$("#camps").innerHTML = CAMPS.map((c) => `<tr><td><b>${c.n}</b></td><td>${c.o}</td><td class="r">${usd(c.g)}</td><td class="r">${fmt(c.al)}</td><td class="r">${dec(c.fr)}</td><td class="r">${dec(c.ctr)} %</td><td class="r">$ ${dec(c.cpm, 2)}</td><td class="r">${c.l}</td><td class="r">$ ${dec(c.g / c.l, 2)}</td><td class="r">${c.v}</td></tr>`).join("");
+
+
+(function () { // puesto de @supricom en cada medida
+  const me = CUENTAS.find((a) => a.me), N = CUENTAS.length;
+  const pos = (k) => [...CUENTAS].sort((a, b) => b[k] - a[k]).indexOf(me) + 1;
+  const M = [
+    { k: "seg", n: "Seguidores", d: `${fmt(me.seg)} seguidores` },
+    { k: "dseg", n: "Crecimiento", d: `+${fmt(me.dseg)} en 30 días` },
+    { k: "pub", n: "Frecuencia", d: `${dec(me.pub)} publicaciones por semana` },
+    { k: "int", n: "Interacción", d: `${fmt(me.int)} por publicación` },
+  ];
+  $("#ranks").innerHTML = M.map((m) => `<div class="rk"><span>${m.n}</span><b class="num">${pos(m.k)}.º <small>de ${N}</small></b><em>${m.d}</em></div>`).join("");
+})();
+$("#accs").innerHTML = CUENTAS.map((a) => `<div class="acc ${a.me ? "me" : ""}"><div class="h"><span class="ringav"><span>${a.n.slice(1, 3).toUpperCase()}</span></span><b>${a.n}</b>${a.me ? '<span class="pill blue">Tú</span>' : ""}</div>
+  <dl><dt>Seguidores</dt><dd>${fmt(a.seg)}</dd><dt>Ganados en 30 días</dt><dd class="up">+${fmt(a.dseg)}</dd><dt>Publicaciones por semana</dt><dd>${dec(a.pub)}</dd><dt>Interacción promedio</dt><dd>${fmt(a.int)}</dd></dl></div>`).join("");
+hbars($("#c-frec"), CUENTAS.map((a) => ({ n: a.n, v: a.pub, me: a.me })), "", true);
+hbars($("#c-int"), CUENTAS.map((a) => ({ n: a.n, v: a.int, me: a.me })), "", true);
+$("#c-top").innerHTML = CTOP.map((p) => `<tr><td><div class="post"><span class="thumb">${p.f.toUpperCase()}</span><div><b>${p.t}</b></div></div></td><td>${p.a}</td><td>${p.f}</td><td>${p.d}</td><td class="r">${fmt(p.mg)}</td><td class="r">${fmt(p.co)}</td><td class="r"><button class="btn sm" data-t="Abre la publicación en Instagram">Ver</button></td></tr>`).join("");
+
+
+const EST = { alta: ["green", "Alta rotación"], media: ["blue", "Rotación media"], baja: ["red", "Baja o estancado"] };
+function renderRot() {
+  const q = $("#r-q").value.trim().toLowerCase(), est = $("#r-est").value, ord = $("#r-ord").value, sinFl = $("#r-flyer").getAttribute("aria-pressed") === "true";
+  let rows = ROT.map((r) => ({ ...r, dp: r.st * r.p }))
+    .filter((r) => (!q || (r.sku + r.n + r.m).toLowerCase().includes(q)) && (!est || r.e === est) && (!sinFl || !r.fl));
+  rows.sort(ord === "dinero" ? (a, b) => b.dp - a.dp : ord === "dias" ? (a, b) => b.dsv - a.dsv : (a, b) => b.cob - a.cob);
+  $("#rot").innerHTML = rows.length ? rows.map((r) => `<tr><td class="num" style="color:#475569">${r.sku}</td><td><b>${r.n}</b></td><td>${r.m}</td><td class="r">${usd(r.p)}</td><td class="r">${fmt(r.st)}</td><td class="r">${fmt(r.v30)}</td><td class="r">${r.cob} d</td><td class="r">${r.dsv} d</td><td class="r"><b>${usd(Math.round(r.dp))}</b></td>
+    <td>${r.fl ? '<span class="pill green">Sí</span>' : '<button class="btn sm" data-t="Abre la solicitud de flyer con este producto">Pedir flyer</button>'}</td><td><span class="pill ${EST[r.e][0]}">${EST[r.e][1]}</span></td></tr>`).join("")
+    : `<tr><td colspan="11" style="text-align:center;color:#475569;padding:24px">Ningún producto cumple estos filtros. Quita «Sin flyer» para ver todos.</td></tr>`;
+}
+["#r-q", "#r-est", "#r-ord"].forEach((s) => $(s).addEventListener("input", renderRot));
+$("#r-flyer").addEventListener("click", (e) => { const b = e.currentTarget; b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true"); renderRot(); });
+renderRot();
+
+
+let cat = "Todas";
+$("#c-marca").innerHTML += [...new Set(PRODS.map((p) => p.m))].sort().map((m) => `<option>${m}</option>`).join("");
+function renderCat() {
+  const q = $("#c-q").value.trim().toLowerCase(), m = $("#c-marca").value;
+  const sinImg = $("#c-sinimg").getAttribute("aria-pressed") === "true", conCero = $("#c-sinstk").getAttribute("aria-pressed") === "true";
+  $("#c-cats").innerHTML = CATS.map((c) => `<button class="chip ${c === cat ? "on" : ""}" data-c="${c}">${c}</button>`).join("");
+  const rows = PRODS.filter((p) => (cat === "Todas" || p.cat === cat) && (!m || p.m === m) && (!q || (p.n + p.c).toLowerCase().includes(q)) && (!sinImg || !p.img) && (conCero || p.s > 0));
+  $("#prods").innerHTML = rows.length ? rows.map((p) => `<article class="prod"><div class="img">${p.img ? ICON.box : ICON.img}${!p.img ? '<span class="pill amber tag">Sin imagen</span>' : ""}</div>
+    <div class="info"><small>${p.c} · ${p.m}</small><b>${p.n}</b><div class="row"><span class="pill ${p.s === 0 ? "red" : "green"}">${p.s === 0 ? "Sin stock" : fmt(p.s) + " uds"}</span><span class="price num">${usd(p.p)}</span></div></div></article>`).join("")
+    : `<div class="panel" style="grid-column:1/-1"><b>No hay productos con estos filtros.</b></div>`;
+}
+$("#c-cats").addEventListener("click", (e) => { const b = e.target.closest("button[data-c]"); if (!b) return; cat = b.dataset.c; renderCat(); });
+["#c-q", "#c-marca"].forEach((s) => $(s).addEventListener("input", renderCat));
+["#c-sinimg", "#c-sinstk"].forEach((s) => $(s).addEventListener("click", (e) => { const b = e.currentTarget; b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true"); renderCat(); }));
+renderCat();
+
+
+let pkDay = 19;
+const FL = { listo: ["green", "Flyer listo"], pedido: ["amber", "Flyer pedido"], no: ["red", "Sin flyer"] };
+function renderCal() {
+  // Noviembre 2026 empieza en domingo → 6 huecos con semana de lunes a domingo
+  let h = ["L", "M", "X", "J", "V", "S", "D"].map((d) => `<span class="dn">${d}</span>`).join("");
+  for (let i = 0; i < 6; i++) h += `<button class="empty" tabindex="-1" aria-hidden="true"></button>`;
+  for (let d = 1; d <= 30; d++) {
+    const L = LLEGADAS[d];
+    h += `<button data-d="${d}" class="${L ? "has " + L.e : ""} ${d === pkDay ? "sel" : ""} ${d === 25 ? "today" : ""}"><b class="num">${d}</b>${L ? `<i>${L.t}</i>` : ""}</button>`;
+  }
+  $("#cal").innerHTML = h;
+  const L = LLEGADAS[pkDay];
+  $("#pk-title").textContent = `${pkDay} de noviembre de 2026`;
+  if (!L || !L.items.length) { $("#pk-sum").innerHTML = ""; $("#pk-list").innerHTML = `<li><div class="txt"><small>Este día no llegó ni se espera mercancía.</small></div></li>`; return; }
+  const sin = L.items.filter((x) => x.fl === "no").length;
+  $("#pk-sum").innerHTML = sin ? `<span class="pill red">${sin} sin flyer</span>` : `<span class="pill green">Todo con flyer</span>`;
+  $("#pk-list").innerHTML = L.items.map((x) => `<li><span class="thumb">${x.q}</span><div class="txt"><b>${x.n}</b><small>${x.c} · ${x.q} unidades</small></div><span class="pill ${FL[x.fl][0]}">${FL[x.fl][1]}</span>${x.fl === "no" ? '<button class="btn sm blue" data-t="Abre la solicitud de flyer con este producto">Pedir flyer</button>' : ""}</li>`).join("");
+}
+$("#cal").addEventListener("click", (e) => { const b = e.target.closest("button[data-d]"); if (!b) return; pkDay = +b.dataset.d; renderCal(); });
+renderCal();
+
+
+const HOY = 2;
+const DIAS = [{ n: "Lun", d: 23 }, { n: "Mar", d: 24 }, { n: "Mié", d: 25 }, { n: "Jue", d: 26 }, { n: "Vie", d: 27 }, { n: "Sáb", d: 28 }];
+const ESP = {
+  contenido: { n: "Contenido", c: "#2563eb", bg: "#eff6ff" }, pop: { n: "Material POP", c: "#0ea5e9", bg: "#f0f9ff" },
+  flyers: { n: "Flyers", c: "#0d9488", bg: "#f0fdfa" }, campanas: { n: "Campañas", c: "#d97706", bg: "#fffbeb" },
+  admin: { n: "Administrativo", c: "#475569", bg: "#f8fafc" },
+};
+const ESTADOS = [
+  { k: "por_hacer", n: "Por hacer", c: "#94a3b8" }, { k: "en_curso", n: "En curso", c: "#2563eb" },
+  { k: "en_revision", n: "En revisión", c: "#d97706" }, { k: "bloqueada", n: "Bloqueada", c: "#dc2626" }, { k: "hecho", n: "Hecho", c: "#047857" },
+];
+const PRIO = { urgente: ["#dc2626", "Urgente"], alta: ["#d97706", "Alta"], normal: ["#2563eb", "Normal"], baja: ["#94a3b8", "Baja"] };
+let TASKS = [
+  { id: 1, t: "Aprobar guion del reel de UPS", e: "contenido", p: "urgente", s: "en_curso", d: 2, h: 9, dur: 1, sub: [2, 4], who: ["JP"] },
+  { id: 2, t: "Revisar solicitudes POP pendientes", e: "pop", p: "alta", s: "por_hacer", d: 2, h: 10.5, dur: .5, who: ["JP"] },
+  { id: 3, t: "Reunión semanal con Diseño", e: "admin", p: "normal", s: "por_hacer", d: 2, h: 11, dur: 1, who: ["JP", "GS"], rec: "Cada miércoles" },
+  { id: 4, t: "Grabar reel Canon en tienda", e: "contenido", p: "alta", s: "por_hacer", d: 2, h: 14, dur: 2, sub: [0, 3], who: ["JP"] },
+  { id: 5, t: "Enviar flyers Black Friday a vendedores", e: "flyers", p: "normal", s: "hecho", d: 2, h: 8, dur: .5, who: ["JP"] },
+  { id: 6, t: "Revisar resultados de campañas", e: "campanas", p: "normal", s: "por_hacer", d: 2, h: 16.5, dur: .5, who: ["JP"], rec: "Cada miércoles" },
+  { id: 7, t: "Tarjetas de presentación y carnet", e: "admin", p: "alta", s: "en_curso", d: 0, venc: 110, who: ["JP"], by: "Gabriel Camacho" },
+  { id: 8, t: "Caja de luz publicitaria", e: "pop", p: "normal", s: "bloqueada", d: 1, venc: 117, who: ["JP"], motivo: "Esperando la cotización del proveedor" },
+  { id: 9, t: "Planificar contenido de la semana", e: "contenido", p: "alta", s: "hecho", d: 0, dur: 1.5, who: ["JP"], rec: "Cada lunes" },
+  { id: 10, t: "Inventario POP de oficina", e: "pop", p: "normal", s: "hecho", d: 0, dur: 1, who: ["JP"] },
+  { id: 11, t: "Publicar carrusel Mini PC", e: "contenido", p: "normal", s: "hecho", d: 1, dur: .5, who: ["JP"] },
+  { id: 12, t: "Pedir flyer de impresora tinta continua", e: "flyers", p: "normal", s: "hecho", d: 1, dur: .3, who: ["JP"] },
+  { id: 13, t: "Publicar reel de UPS", e: "contenido", p: "alta", s: "por_hacer", d: 3, h: 10, dur: .5, who: ["JP"] },
+  { id: 14, t: "Diseño de banderines ASTA", e: "flyers", p: "alta", s: "en_revision", d: 3, dur: 2, sub: [3, 3], who: ["GS"], by: "José" },
+  { id: 15, t: "Entrega POP a Distribuidora Tecno Centro", e: "pop", p: "normal", s: "por_hacer", d: 3, dur: 1, who: ["JP"] },
+  { id: 16, t: "Cotizar banners Hikvision", e: "pop", p: "baja", s: "por_hacer", d: 3, dur: .5, who: ["JP"] },
+  { id: 17, t: "Publicar reel Black Friday", e: "contenido", p: "urgente", s: "por_hacer", d: 4, h: 9, dur: .5, who: ["JP"] },
+  { id: 18, t: "Informe semanal de redes", e: "campanas", p: "normal", s: "por_hacer", d: 4, dur: 1.5, who: ["JP"], rec: "Cada viernes" },
+  { id: 19, t: "Inventario POP de almacén", e: "pop", p: "normal", s: "por_hacer", d: 4, dur: 2, who: ["JP"], rec: "Cada viernes" },
+  { id: 20, t: "Historias del sábado", e: "contenido", p: "baja", s: "por_hacer", d: 5, dur: .5, who: ["JP"] },
+  { id: 21, t: "Ideas de reels para diciembre", e: "contenido", p: "baja", s: "por_hacer", d: null, dur: 1, who: ["JP"] },
+  { id: 22, t: "Actualizar fotos del catálogo", e: "flyers", p: "normal", s: "por_hacer", d: null, dur: 2, who: ["JP", "GS"] },
+];
+let aView = "dia", aEsp = "", openId = null;
+const FLAG = (p) => `<span class="prio" title="Prioridad ${PRIO[p][1]}"><svg viewBox="0 0 24 24" fill="${PRIO[p][0]}" stroke="${PRIO[p][0]}" stroke-width="2"><path d="M5 21V4h11l-2 4 2 4H5"/></svg></span>`;
+const RECI = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg>';
+const CHK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M5 12l5 5L20 7"/></svg>';
+const horaTxt = (h) => `${Math.floor(h)}:${h % 1 ? String(Math.round((h % 1) * 60)).padStart(2, "0") : "00"}`;
+const durTxt = (d) => d >= 1 ? `${dec(d, d % 1 ? 1 : 0)} h` : `${Math.round(d * 60)} min`;
+const vis = () => TASKS.filter((t) => !aEsp || t.e === aEsp);
+const est = (k) => ESTADOS.find((e) => e.k === k);
+const avs = (w) => `<span class="avs">${w.map((x) => `<i>${x}</i>`).join("")}</span>`;
+
+function renderAHead() {
+  const sem = TASKS.filter((t) => t.d != null), hechas = sem.filter((t) => t.s === "hecho").length, pct = Math.round((hechas / sem.length) * 100);
+  const r = 46, C = 2 * Math.PI * r;
+  $("#a-ring").innerHTML = `<svg viewBox="0 0 108 108" aria-hidden="true"><circle cx="54" cy="54" r="${r}" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="10"/><circle cx="54" cy="54" r="${r}" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-dasharray="${(pct / 100) * C} ${C}"/></svg><div><span><b class="num">${pct} %</b><small>de la semana<br>${hechas} de ${sem.length} hechas</small></span></div>`;
+  const hoy = TASKS.filter((t) => t.d === HOY), venc = TASKS.filter((t) => t.venc && t.s !== "hecho");
+  const C4 = [
+    { n: "Vencidas", v: venc.length, c: "#dc2626" }, { n: "Para hoy", v: hoy.filter((t) => t.s !== "hecho").length, c: "#2563eb" },
+    { n: "En revisión", v: TASKS.filter((t) => t.s === "en_revision").length, c: "#d97706" }, { n: "Hechas hoy", v: hoy.filter((t) => t.s === "hecho").length, c: "#047857" },
+  ];
+  $("#a-count").innerHTML = C4.map((x) => `<div class="ac"><span><i style="background:${x.c}"></i>${x.n}</span><b class="num" style="color:${x.c}">${x.v}</b></div>`).join("");
+}
+function renderATabs() {
+  const T = [
+    { k: "dia", n: "Mi día", i: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>' },
+    { k: "semana", n: "Semana", i: '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4M9 13v5M15 13v5"/>' },
+    { k: "tablero", n: "Tablero", i: '<rect x="3" y="3" width="5" height="18" rx="1.5"/><rect x="10" y="3" width="5" height="12" rx="1.5"/><rect x="17" y="3" width="4" height="8" rx="1.5"/>' },
+    { k: "lista", n: "Lista", i: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>' },
+  ];
+  $("#a-tabs").innerHTML = T.map((t) => `<button role="tab" aria-selected="${t.k === aView}" class="${t.k === aView ? "on" : ""}" data-av="${t.k}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${t.i}</svg>${t.n}</button>`).join("");
+  $("#a-esp").innerHTML = `<button class="${!aEsp ? "on" : ""}" data-es="">Todos los espacios</button>` + Object.entries(ESP).map(([k, v]) => `<button class="${aEsp === k ? "on" : ""}" data-es="${k}"><i style="background:${v.c}"></i>${v.n}</button>`).join("");
+}
+function taskRow(t) {
+  const meta = [];
+  if (t.venc && t.s !== "hecho") meta.push(`<span class="pill red">Vencida hace ${t.venc} días</span>`);
+  if (t.h != null) meta.push(`<span>${horaTxt(t.h)}</span>`);
+  if (t.dur) meta.push(`<span>${durTxt(t.dur)}</span>`);
+  meta.push(`<span style="color:${ESP[t.e].c};font-weight:600">● ${ESP[t.e].n}</span>`);
+  if (t.s !== "por_hacer" && t.s !== "hecho") meta.push(`<span class="pill" style="background:${est(t.s).c}1a;color:${est(t.s).c}">${est(t.s).n}</span>`);
+  if (t.sub) meta.push(`<span>☑ ${t.sub[0]}/${t.sub[1]}</span>`);
+  if (t.rec) meta.push(`<span class="rec">${RECI}${t.rec}</span>`);
+  if (t.by) meta.push(`<span>Asignada por ${t.by}</span>`);
+  return `<div class="task ${t.s === "hecho" ? "done" : ""}" data-id="${t.id}"><button class="chk" data-chk="${t.id}" aria-label="Marcar como hecha">${CHK}</button>${FLAG(t.p)}<div class="tt"><b>${t.t}</b><div class="ln">${meta.join("")}</div></div>${avs(t.who)}</div>`;
+}
+function vDia() {
+  const hoy = vis().filter((t) => t.d === HOY), venc = vis().filter((t) => t.venc && t.s !== "hecho");
+  const H0 = 8, H1 = 18, ROW = 56;
+  let hrs = "", slots = "";
+  for (let h = H0; h < H1; h++) { hrs += `<span>${h}:00</span>`; slots += `<div class="slot"></div>`; }
+  const blocks = hoy.filter((t) => t.h != null).map((t) => `<div class="blk ${t.s === "hecho" ? "done" : ""}" data-id="${t.id}" style="top:${(t.h - H0) * ROW + 2}px;height:${Math.max(t.dur * ROW - 4, 26)}px;background:${ESP[t.e].bg};border-color:${ESP[t.e].c};color:#0f172a"><b>${t.t}</b><small>${horaTxt(t.h)} · ${durTxt(t.dur)}</small></div>`).join("");
+  const nowTop = (10.25 - H0) * ROW;
+  const top3 = hoy.filter((t) => t.s !== "hecho").sort((a, b) => Object.keys(PRIO).indexOf(a.p) - Object.keys(PRIO).indexOf(b.p)).slice(0, 3);
+  const pend = hoy.filter((t) => t.s !== "hecho").sort((a, b) => (a.h ?? 99) - (b.h ?? 99)), hechas = hoy.filter((t) => t.s === "hecho");
+  return `<div class="day2">
+    <div class="panel"><div class="panel-h"><h2>Agenda de hoy</h2><small>arrastra una tarea a una hora para reservarle tiempo</small></div>
+      <div class="tl"><div class="hrs">${hrs}</div><div class="lane">${slots}${blocks}<div class="now" style="top:${nowTop}px" title="Ahora, 10:15"></div></div></div></div>
+    <div class="main" style="gap:14px">
+      <div class="panel"><div class="panel-h"><h2>Tus 3 prioridades de hoy</h2></div>
+        <div class="top3">${top3.map((t, i) => `<div class="t"><b class="n">${i + 1}</b><span>${t.t}</span>${FLAG(t.p)}</div>`).join("")}</div></div>
+      <div class="panel">
+        ${venc.length ? `<div class="tgroup"><h3><i class="dot" style="background:#dc2626"></i>Vencidas · ${venc.length}</h3>${venc.map(taskRow).join("")}</div>` : ""}
+        <div class="tgroup"><h3><i class="dot" style="background:#2563eb"></i>Hoy · ${pend.length}</h3>${pend.map(taskRow).join("") || '<span class="src">Nada pendiente para hoy.</span>'}</div>
+        ${hechas.length ? `<div class="tgroup"><h3><i class="dot" style="background:#047857"></i>Hechas hoy · ${hechas.length}</h3>${hechas.map(taskRow).join("")}</div>` : ""}
+      </div>
+    </div></div>`;
+}
+function wcard(t) {
+  return `<div class="wcard ${t.s === "hecho" ? "done" : ""}" draggable="true" data-id="${t.id}" style="border-color:${ESP[t.e].c}"><b>${t.t}</b>
+    ${t.sub ? `<div class="prog"><i style="width:${(t.sub[0] / t.sub[1]) * 100}%"></i></div>` : ""}
+    <div class="ln">${FLAG(t.p)}${t.h != null ? `<span>${horaTxt(t.h)}</span>` : ""}${t.dur ? `<span>${durTxt(t.dur)}</span>` : ""}${t.rec ? `<span class="rec">${RECI}</span>` : ""}${t.s === "en_revision" ? '<span class="pill amber">En revisión</span>' : ""}${t.s === "bloqueada" ? '<span class="pill red">Bloqueada</span>' : ""}<span style="margin-left:auto">${avs(t.who)}</span></div></div>`;
+}
+function vSemana() {
+  const cols = DIAS.map((dd, i) => {
+    const ts = vis().filter((t) => t.d === i), carga = ts.filter((t) => t.s !== "hecho").reduce((a, t) => a + (t.dur || 0), 0), pct = Math.min(carga / 6, 1.2);
+    const col = pct > 1 ? "#dc2626" : pct > .75 ? "#d97706" : "#047857";
+    return `<div class="wcol ${i === HOY ? "today" : ""}" data-drop-d="${i}"><div class="wh"><b><span class="num">${dd.d}</span>${dd.n}</b><small>${durTxt(carga || 0)} de 6 h</small></div>
+      <div class="cap" title="Carga del día"><i style="width:${Math.min(pct, 1) * 100}%;background:${col}"></i></div>${ts.map(wcard).join("")}</div>`;
+  }).join("");
+  const sin = vis().filter((t) => t.d == null);
+  return `<div class="panel"><div class="panel-h"><h2>Semana del 23 al 28 de noviembre</h2><div class="filters"><button class="btn sm">‹ Anterior</button><button class="btn sm">Siguiente ›</button></div></div>
+    <div class="week">${cols}</div><div class="src">Arrastra las tarjetas entre días. La barra de cada día compara las horas estimadas con una jornada de 6 h: verde, bien; ámbar, justo; rojo, sobrecargado.</div></div>
+    <div class="panel"><div class="panel-h"><h2>Sin fecha · ${sin.length}</h2><small>arrástralas a un día para programarlas</small></div>
+      <div class="week" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));overflow:visible"><div class="wcol" data-drop-d="null" style="min-height:0;grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px">${sin.map((t) => `<div style="flex:1 1 220px">${wcard(t)}</div>`).join("")}</div></div></div>`;
+}
+function vTablero() {
+  return `<div class="board">${ESTADOS.map((e) => { const ts = vis().filter((t) => t.s === e.k && (e.k !== "hecho" || t.d === HOY || t.d === HOY - 1));
+    return `<div class="bcol" data-drop-s="${e.k}"><div class="bh"><i style="background:${e.c}"></i>${e.n}<small>${ts.length}</small></div>${ts.map(wcard).join("")}</div>`; }).join("")}</div>
+    <div class="src">Arrastra entre columnas para cambiar el estado. Lo que asignó otra persona pasa a «En revisión» al terminarlo. En «Hecho» solo se ven las de ayer y hoy.</div>`;
+}
+function vLista() {
+  return Object.entries(ESP).filter(([k]) => !aEsp || k === aEsp).map(([k, v]) => {
+    const ts = TASKS.filter((t) => t.e === k); if (!ts.length) return "";
+    return `<div class="panel"><div class="panel-h"><h2><i class="dot" style="background:${v.c};margin-right:8px"></i>${v.n}</h2><small>${ts.filter((t) => t.s !== "hecho").length} pendientes</small></div>
+      <div class="tbl-wrap"><table><thead><tr><th>Tarea</th><th>Estado</th><th>Prioridad</th><th>Responsables</th><th>Fecha</th><th class="r">Tiempo</th><th>Subtareas</th></tr></thead><tbody>
+      ${ts.map((t) => `<tr data-id="${t.id}" style="cursor:pointer"><td><b>${t.t}</b>${t.rec ? ` <span class="rec">${RECI}${t.rec}</span>` : ""}</td><td><span class="pill" style="background:${est(t.s).c}1a;color:${est(t.s).c}">${est(t.s).n}</span></td>
+        <td>${FLAG(t.p)} ${PRIO[t.p][1]}</td><td>${avs(t.who)}</td><td>${t.d == null ? '<span class="pill gray">Sin fecha</span>' : `${DIAS[t.d].n} ${DIAS[t.d].d}${t.h != null ? " · " + horaTxt(t.h) : ""}`}${t.venc && t.s !== "hecho" ? ' <span class="pill red">Vencida</span>' : ""}</td>
+        <td class="r">${t.dur ? durTxt(t.dur) : "—"}</td><td>${t.sub ? `<div style="display:flex;gap:8px;align-items:center"><div class="prog" style="width:60px"><i style="width:${(t.sub[0] / t.sub[1]) * 100}%"></i></div>${t.sub[0]}/${t.sub[1]}</div>` : "—"}</td></tr>`).join("")}
+      </tbody></table></div></div>`;
+  }).join("");
+}
+function renderA() {
+  renderAHead(); renderATabs();
+  $("#a-body").innerHTML = aView === "dia" ? vDia() : aView === "semana" ? vSemana() : aView === "tablero" ? vTablero() : vLista();
+  if (openId) openDrawer(openId);
+}
+function openDrawer(id) {
+  const t = TASKS.find((x) => x.id === id); if (!t) return; openId = id;
+  const e = est(t.s), subs = t.sub ? Array.from({ length: t.sub[1] }, (_, i) => i < t.sub[0]) : [];
+  const SUBT = ["Escribir el guion", "Revisar precios con Compras", "Grabar tomas", "Editar y subir"];
+  $("#a-drawer").innerHTML = `<div class="dh"><div class="row1"><span class="pill" style="background:${ESP[t.e].bg};color:${ESP[t.e].c}">● ${ESP[t.e].n}</span><button class="btn sm" data-close aria-label="Cerrar">Cerrar</button></div><h3>${t.t}</h3>
+      <div class="filters"><span class="pill" style="background:${e.c}1a;color:${e.c}">${e.n}</span>${t.rec ? `<span class="rec">${RECI}${t.rec}</span>` : ""}</div></div>
+    <div class="db">
+      ${t.motivo ? `<div class="chg warn"><b>Bloqueada:</b> ${t.motivo}</div>` : ""}
+      <dl><dt>Prioridad</dt><dd>${FLAG(t.p)} ${PRIO[t.p][1]}</dd><dt>Responsables</dt><dd>${avs(t.who)}</dd>
+        <dt>Fecha</dt><dd>${t.d == null ? "Sin fecha" : `${DIAS[t.d].n} ${DIAS[t.d].d} de noviembre${t.h != null ? " · " + horaTxt(t.h) : ""}`}</dd>
+        <dt>Tiempo estimado</dt><dd>${t.dur ? durTxt(t.dur) : "—"}</dd><dt>Asignada por</dt><dd>${t.by || "Tú"}</dd></dl>
+      ${subs.length ? `<div><b style="font-size:13px">Subtareas · ${t.sub[0]}/${t.sub[1]}</b><div class="subs" style="margin-top:8px">${subs.map((ok, i) => `<label><input type="checkbox" ${ok ? "checked" : ""} data-sub="${i}"> ${SUBT[i] || "Subtarea " + (i + 1)}</label>`).join("")}</div></div>` : ""}
+      <div><b style="font-size:13px">Comentarios</b><div class="cm" style="margin-top:8px"><div><b>Gabriel S.</b> · ayer 4:12 p. m.<br>Te dejé las tomas de referencia en la carpeta del reel.</div><div><b>Tú</b> · hoy 8:40 a. m.<br>Perfecto, lo reviso antes de las 10.</div></div></div>
+      <div><b style="font-size:13px">Historial</b><div class="src" style="margin-top:6px">Creada el lunes 23 · pasó a «En curso» hoy 8:35 a. m.</div></div>
+    </div>
+    <div class="df">${t.s !== "hecho" ? `<button class="btn sm" data-st="bloqueada">Bloquear</button><button class="btn sm" data-st="en_curso">En curso</button><button class="btn sm primary" data-st="hecho">${t.by && t.by !== "José" ? "Enviar a revisión" : "Marcar hecha"}</button>` : `<button class="btn sm" data-st="en_curso">Reabrir</button>`}</div>`;
+  $("#a-drawer").hidden = false; $("#a-scrim").hidden = false;
+}
+function closeDrawer() { openId = null; $("#a-drawer").hidden = true; $("#a-scrim").hidden = true; }
+function setEstado(id, s) {
+  const t = TASKS.find((x) => x.id === id); if (!t) return;
+  if (s === "hecho" && t.by && t.by !== "José") { t.s = "en_revision"; toast("Enviada a revisión: " + t.by + " debe aprobarla"); }
+  else if (s === "bloqueada") { t.s = "bloqueada"; t.motivo = t.motivo || "Sin motivo todavía: el panel lo pide al bloquear"; toast("Tarea bloqueada"); }
+  else { t.s = s; if (s === "hecho") toast("¡Hecha!"); }
+  renderA();
+}
+$("#a-tabs").addEventListener("click", (e) => { const b = e.target.closest("[data-av]"); if (b) { aView = b.dataset.av; renderA(); } });
+$("#a-esp").addEventListener("click", (e) => { const b = e.target.closest("[data-es]"); if (b) { aEsp = b.dataset.es; renderA(); } });
+$("#a-body").addEventListener("click", (e) => {
+  const c = e.target.closest("[data-chk]");
+  if (c) { e.stopPropagation(); const t = TASKS.find((x) => x.id === +c.dataset.chk); setEstado(t.id, t.s === "hecho" ? "por_hacer" : "hecho"); return; }
+  const r = e.target.closest("[data-id]"); if (r) openDrawer(+r.dataset.id);
+});
+$("#a-drawer").addEventListener("click", (e) => {
+  if (e.target.closest("[data-close]")) return closeDrawer();
+  const s = e.target.closest("[data-st]"); if (s) setEstado(openId, s.dataset.st);
+});
+$("#a-drawer").addEventListener("change", (e) => {
+  const cb = e.target.closest("[data-sub]"); if (!cb) return;
+  const t = TASKS.find((x) => x.id === openId); t.sub[0] += cb.checked ? 1 : -1; renderA();
+});
+$("#a-scrim").addEventListener("click", closeDrawer);
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && openId) closeDrawer(); });
+
+let dragId = null;
+$("#a-body").addEventListener("dragstart", (e) => { const c = e.target.closest(".wcard"); if (!c) return; dragId = +c.dataset.id; c.classList.add("dragging"); e.dataTransfer.effectAllowed = "move"; try { e.dataTransfer.setData("text/plain", String(dragId)); } catch (_) {} });
+$("#a-body").addEventListener("dragend", (e) => { const c = e.target.closest(".wcard"); if (c) c.classList.remove("dragging"); document.querySelectorAll(".over").forEach((x) => x.classList.remove("over")); });
+$("#a-body").addEventListener("dragover", (e) => { const z = e.target.closest("[data-drop-d],[data-drop-s]"); if (!z) return; e.preventDefault(); document.querySelectorAll(".over").forEach((x) => x !== z && x.classList.remove("over")); z.classList.add("over"); });
+$("#a-body").addEventListener("drop", (e) => {
+  const z = e.target.closest("[data-drop-d],[data-drop-s]"); if (!z || dragId == null) return; e.preventDefault();
+  const t = TASKS.find((x) => x.id === dragId);
+  if (z.dataset.dropS) setEstado(t.id, z.dataset.dropS);
+  else { const d = z.dataset.dropD === "null" ? null : +z.dataset.dropD; t.d = d; if (d !== HOY) delete t.h; toast(d == null ? "Tarea sin fecha" : `Movida al ${DIAS[d].n.toLowerCase()} ${DIAS[d].d}`); renderA(); }
+  dragId = null;
+});
+
+$("#a-quick").addEventListener("keydown", (e) => {
+  if (e.key !== "Enter") return;
+  let txt = e.target.value.trim(); if (!txt) return;
+  const t = { id: Date.now(), e: "contenido", p: "normal", s: "por_hacer", d: HOY, dur: .5, who: ["JP"] };
+  txt = txt.replace(/#(\w+)/g, (_, w) => { const k = Object.keys(ESP).find((k) => k.startsWith(w.toLowerCase().slice(0, 3)) || ESP[k].n.toLowerCase().startsWith(w.toLowerCase())); if (k) t.e = k; return ""; });
+  txt = txt.replace(/!(urgente|alta|normal|baja)/i, (_, p) => { t.p = p.toLowerCase(); return ""; });
+  txt = txt.replace(/@(\w+)/g, (_, w) => { t.who.push(w.slice(0, 2).toUpperCase()); return ""; });
+  txt = txt.replace(/\b(\d{1,2}):(\d{2})\b/, (_, h, m) => { t.h = +h + +m / 60; return ""; });
+  txt = txt.replace(/\bcada (lunes|martes|miércoles|jueves|viernes)\b/i, (_, d) => { t.rec = "Cada " + d.toLowerCase(); return ""; });
+  txt = txt.replace(/\bmañana\b/i, () => { t.d = HOY + 1; return ""; }).replace(/\bhoy\b/i, () => "");
+  t.t = txt.replace(/\s+/g, " ").trim() || "Tarea nueva";
+  TASKS.push(t); e.target.value = ""; renderA();
+  toast(`Creada: ${t.t} · ${t.d === HOY ? "hoy" : DIAS[t.d].n + " " + DIAS[t.d].d}${t.h != null ? " " + horaTxt(t.h) : ""} · ${ESP[t.e].n}`);
+});
+renderA();
+
+
+$("#mnav").innerHTML = SECCIONES.map((s) => `<a data-v="${s.v}" href="#${s.v}">${s.n}</a>`).join("");
+function show() {
+  closeDrawer();
+  const v = (location.hash || "#actividades").slice(1);
+  const ok = SECCIONES.some((s) => s.v === v) ? v : "actividades";
+  document.querySelectorAll(".view").forEach((s) => { s.hidden = true; });
+  if (SIN_CAMBIOS[ok]) { $("#same-t").textContent = SIN_CAMBIOS[ok][0]; $("#same-p").textContent = SIN_CAMBIOS[ok][1]; $("#v-same").hidden = false; }
+  else $("#v-" + ok).hidden = false;
+  document.querySelectorAll("[data-v]").forEach((a) => a.classList.toggle("on", a.dataset.v === ok));
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", show);
+show();
+</script>
+
+</html>
